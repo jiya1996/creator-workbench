@@ -58,7 +58,7 @@ function dialog(title, content) {
 
 async function getPage(key) {
   if (!cache.has(key)) {
-    const response = await fetch(`/creator-workbench/data/pages/${encodeURIComponent(key)}.json`)
+    const response = await fetch(`/creator-workbench/data/pages/${encodeURIComponent(key)}.json`, { cache: 'no-store' })
     if (!response.ok) throw new Error('页面资料读取失败')
     cache.set(key, await response.json())
   }
@@ -177,7 +177,7 @@ async function render(key, options = {}) {
   stylesheet.href = '/creator-workbench/replica.css'
   document.head.append(stylesheet)
   document.body.replaceWith(doc.body)
-  document.title = data.title.replace(/｜稳行高处$/, '') + ' · 本地复刻'
+  document.title = data.title.replace(/｜创作工作台$/, '') + ' · 本地复刻'
   currentPage = data
   currentKey = key
   const params = new URL(location.href).searchParams
@@ -338,7 +338,7 @@ function showSearch() {
 }
 
 async function showCoverage() {
-  const coverage = await (await fetch('/creator-workbench/data/coverage.json')).json()
+  const coverage = await (await fetch('/creator-workbench/data/coverage.json', { cache: 'no-store' })).json()
   dialog('复刻范围与本机数据', `<p>已保存 ${coverage.capturedStates} 个界面状态，包含 ${coverage.contentDetails} 个内容详情、${coverage.lessons} 个必修课页面。</p><p>爆款库包含 ${coverage.benchmarkVideos} 条列表与 ${coverage.benchmarkDetails} 份拆解详情。经营优势测评包含 ${coverage.founderQuestions} 道题目，已补入原站完成的真实基础分析报告与原版报告。</p><p>补充 ${coverage.externalDocuments} 篇参考资料和 ${coverage.embeddedTables} 张嵌入表格。</p><p>原站版本 ${escapeHTML(coverage.sourceVersion)}</p><p>笔记、稿件、客户和行动保存在当前浏览器。</p><p>待接入的能力包括 AI 生成、测评角色报告、服务器登录、跨设备同步、第三方笔记、提醒发送与在线支付。</p><p>当前版本仍有已知功能缺口，尚未通过全功能一致性验收。</p><ul>${coverage.limitations.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><button data-export-local>导出本机数据</button>`)
 }
 
@@ -1436,7 +1436,7 @@ document.addEventListener('click', event => {
 window.addEventListener('popstate', () => render(pageKey(new URL(location.href))))
 
 try {
-  catalog = await (await fetch('/creator-workbench/data/catalog.json')).json()
+  catalog = await (await fetch('/creator-workbench/data/catalog.json', { cache: 'no-store' })).json()
   if (location.pathname.startsWith('/creator-workbench/s/')) {
     const slug = decodeURIComponent(location.pathname.slice(21))
     const link = state.shortLinks.find(item => item.slug === slug)

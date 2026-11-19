@@ -1611,7 +1611,7 @@ body[data-page="settings"] .save-password { font-size: var(--font-14); }
 .settings-flow > section[id] { scroll-margin-top: 88px; }
 
 /* ═══ 设置页二轮调整：横幅退出按钮 / 登录信息重排 / 三列资料 / 浮动帮助 ═══ */
-/* 退出当前账号上移到横幅：「徐锋，你好」与「已认证」之间，悬停提示见按钮 title */
+/* 退出当前账号上移到横幅：「，你好」与「已认证」之间，悬停提示见按钮 title */
 .profile-banner .profile-seal { margin-left: 0; }
 .profile-banner-logout { position: relative; z-index: 2; margin-left: auto; margin-right: 18px; }
 .profile-banner .logout-button { width: auto; min-width: 150px; margin-top: 0; padding: 0 20px; white-space: nowrap; }

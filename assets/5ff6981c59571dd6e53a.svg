@@ -77,7 +77,7 @@
 
     <rect x="60" y="916" width="630" height="112" rx="18" fill="rgba(176,125,79,.10)" stroke="rgba(176,125,79,.3)"/>
     <text x="90" y="962" font-size="24" fill="#f6f1e8">把每天的一小步，攒成看得见的资产。</text>
-    <text x="90" y="1000" font-size="19" fill="rgba(246,241,232,.62)">稳行高处 · 创始人 IP 陪跑与操盘</text>
+    <text x="90" y="1000" font-size="19" fill="rgba(246,241,232,.62)">创作工作台 · 创始人 IP 陪跑与操盘</text>
 
     <line x1="60" y1="1064" x2="690" y2="1064" stroke="rgba(246,241,232,.12)" stroke-width="1"/>
     <text x="60" y="1108" font-size="20" fill="rgba(246,241,232,.62)">wxgaochu.com</text>

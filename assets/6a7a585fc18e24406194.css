@@ -1,0 +1,144 @@
+/* 沙龙与活动 · 活动卡片与详情弹层（library.html?section=activities）
+   全部样式外链（CSP style-src 'self'，JS 只切 class / hidden）。
+   该页为混排列表：内容活动用 content.css 的 .content-card，沙龙活动用这里的 .salon-card；
+   两类都是 flex 列 + 底部 margin-top:auto，被网格拉伸后高度对齐、操作区贴底。 */
+
+/* ---------- 卡片列表 ---------- */
+.library-grid.salon-activities-grid { align-items: stretch; }
+.salon-group-title { grid-column: 1 / -1; margin: 22px 0 0; color: var(--ink, #173c30); font-size: var(--font-20, 20px); line-height: 1.4; }
+.salon-group-empty { grid-column: 1 / -1; margin: 0; padding: 18px 20px; border: 1px solid var(--line, #d8e9e1); border-radius: 14px; color: var(--muted, #668276); background: var(--paper-solid, #fff); }
+
+.salon-grid-status { grid-column: 1 / -1; padding: 38px 8px; text-align: center; color: #708299; font-size: var(--font-14); }
+.salon-grid-status.is-error { color: #c0392b; }
+
+.salon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 244px;
+  padding: 22px 22px 18px;
+  border: 1px solid rgba(255, 255, 255, .78);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 14px 30px rgba(40, 86, 145, .08);
+  cursor: pointer;
+  text-align: left;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.salon-card:hover { transform: translateY(-4px); box-shadow: 0 22px 42px rgba(40, 86, 145, .13); border-color: color-mix(in srgb, var(--brand) 26%, transparent); }
+.salon-card:focus-visible { outline: 3px solid rgba(36, 111, 232, .25); outline-offset: 3px; }
+.salon-card.is-expired { background: rgba(246, 248, 251, .62); }
+.salon-card.is-expired:hover { transform: none; box-shadow: 0 14px 30px rgba(40, 86, 145, .07); border-color: rgba(255, 255, 255, .78); }
+
+.salon-card-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+/* 混排序号：与 content.css 的 .card-visual span 同一套读数（01…N），两类卡片共用同一条列表序号 */
+.salon-card-index {
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: #7d8da0;
+  background: rgba(133, 147, 166, .13);
+  font-size: var(--font-12);
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+.salon-card-channel {
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: var(--font-12);
+  font-weight: 850;
+  letter-spacing: .02em;
+  color: var(--brand-deep);
+  background: color-mix(in srgb, var(--brand) 12%, var(--paper));
+}
+.salon-card-channel.is-online { color: #fff; background: linear-gradient(135deg, var(--brand), var(--brand-2)); }
+.salon-card-state { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; font-size: var(--font-12); font-weight: 850; }
+.salon-card-state.is-checked { color: #1f7a52; background: rgba(46, 178, 122, .14); }
+.salon-card-state.is-ended { color: #8593a6; background: rgba(133, 147, 166, .14); }
+
+.salon-card-title { margin: 2px 0 0; font-size: 19px; line-height: 1.42; letter-spacing: -.025em; }
+.salon-card-line { margin: 0; display: flex; align-items: center; gap: 7px; color: #708299; font-size: 13px; line-height: 1.7; }
+.salon-card-line svg { flex: none; width: 15px; height: 15px; color: var(--brand); stroke-width: 1.6; }
+.salon-card-line span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.salon-card-points { margin: 0; color: var(--brand-deep); font-size: 12px; font-weight: 800; }
+
+.salon-card-foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px dashed color-mix(in srgb, var(--brand) 18%, rgba(40, 86, 145, .12)); }
+.salon-card-coupons { display: inline-flex; align-items: center; gap: 6px; min-width: 0; color: #9a6a1f; font-size: 12px; font-weight: 850; }
+.salon-card-coupons svg { flex: none; width: 15px; height: 15px; }
+.salon-card-coupons.is-none { color: #93a1b3; font-weight: 700; }
+.salon-card-cta { display: inline-flex; align-items: center; gap: 5px; flex: none; color: var(--brand); font-size: 12px; font-weight: 850; }
+.salon-card-cta svg { width: 15px; height: 15px; }
+
+/* ---------- 详情弹层 ---------- */
+/* 必须用 --paper-solid 而不是 --paper：--paper 是 rgba(...,.78) 级别的半透明色，
+   直接当弹层底色会让底层卡片文字透出来（2026-09-20 线上反馈「弹层过于透明、内容看不清」）。
+   与 meeting-dialog / points-checkin-dialog / portrait-admin-dialog 同款处理：
+   弹层一律走不透明底色，半透明只留给卡片。 */
+.salon-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--brand) 16%, rgba(255, 255, 255, .8));
+  border-radius: 22px;
+  background: var(--paper-solid, #f7fbff);
+  color: var(--ink);
+  box-shadow: 0 30px 70px rgba(18, 42, 78, .28);
+  overflow: auto;
+}
+.salon-dialog::backdrop { background: rgba(12, 26, 48, .46); backdrop-filter: blur(3px); }
+.salon-dialog-head { position: relative; padding: 24px 24px 16px; border-bottom: 1px solid color-mix(in srgb, var(--brand) 12%, rgba(40, 86, 145, .1)); }
+.salon-dialog-kicker { display: inline-flex; align-items: center; gap: 7px; color: var(--brand); font-size: var(--font-12); font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+.salon-dialog-kicker svg { width: 15px; height: 15px; }
+.salon-dialog-title { margin: 8px 34px 0 0; font-size: clamp(20px, 3vw, 24px); line-height: 1.35; letter-spacing: -.03em; }
+.salon-dialog-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--brand) 18%, rgba(40, 86, 145, .14)); border-radius: 50%; color: #6d7d92; background: rgba(255, 255, 255, .7); cursor: pointer; }
+.salon-dialog-close:hover { color: var(--brand-deep); background: rgba(255, 255, 255, .95); }
+.salon-dialog-close svg { width: 15px; height: 15px; }
+
+.salon-dialog-body { padding: 18px 24px 4px; display: grid; gap: 12px; }
+.salon-detail-grid { margin: 0; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px 12px; }
+.salon-detail-grid dt { color: #8593a6; font-size: var(--font-14); font-weight: 700; }
+.salon-detail-grid dd { margin: 0; font-size: var(--font-14); line-height: 1.6; word-break: break-word; }
+.salon-detail-note { margin: 0; padding: 12px 14px; border-radius: 14px; color: #5a6b7e; background: color-mix(in srgb, var(--brand) 6%, rgba(244, 247, 251, .9)); font-size: var(--font-14); line-height: 1.75; }
+.salon-detail-coupon-note { margin: 0; color: #9a6a1f; font-size: var(--font-14); font-weight: 800; }
+
+.salon-dialog-actions { padding: 16px 24px 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+.salon-action {
+  flex: 0 1 calc(50% - 5px);
+  min-width: 132px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--brand) 22%, rgba(40, 86, 145, .16));
+  border-radius: 12px;
+  color: var(--brand-deep);
+  background: color-mix(in srgb, var(--brand) 7%, rgba(255, 255, 255, .92));
+  font-size: var(--font-14);
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, filter .18s ease;
+}
+.salon-action svg { flex: none; width: 16px; height: 16px; }
+.salon-action:hover { transform: translateY(-1px); box-shadow: 0 10px 22px color-mix(in srgb, var(--brand) 16%, transparent); }
+.salon-action:focus-visible { outline: 3px solid rgba(36, 111, 232, .25); outline-offset: 2px; }
+.salon-action.is-primary { color: #fff; border-color: color-mix(in srgb, var(--brand-gold, #b07d4f) 70%, #7a5320); background: linear-gradient(135deg, var(--brand-gold, #b07d4f), color-mix(in srgb, var(--brand-gold, #b07d4f) 74%, #7a5320)); box-shadow: 0 8px 20px -8px var(--brand-gold, #b07d4f); }
+.salon-action.is-primary:hover { filter: brightness(1.04); }
+.salon-action.is-ghost { color: #5a6b7e; background: rgba(255, 255, 255, .86); }
+
+@media (max-width: 900px) {
+  .salon-card { min-height: 0; }
+}
+@media (max-width: 640px) {
+  .library-grid.salon-activities-grid { grid-template-columns: 1fr; }
+  .salon-detail-grid { grid-template-columns: 1fr; gap: 2px 0; }
+  .salon-detail-grid dt { margin-top: 8px; }
+  .salon-dialog-actions { flex-direction: column; }
+  .salon-action { flex: none; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .salon-card, .salon-action { transition: none; }
+  .salon-card:hover { transform: none; }
+}

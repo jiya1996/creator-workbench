@@ -1,0 +1,156 @@
+/* 工作台头像彩蛋 · 全屏舞台样式（2026-09-21a）
+ *
+ * ⚠️ 安全铁律：会员页由 Caddy 下发 CSP `style-src 'self'`（没有 'unsafe-inline'）。
+ *    因此以下三种做法**全部会被浏览器拒绝**，历史上已导致两次线上事故：
+ *      ① JS createElement('style') 注入样式表  → Refused to apply inline style
+ *      ② 元素内联 style 属性 / CSSOM el.style.* → 同样被拒
+ *      ③ 内嵌 @keyframes（随 <style> 注入时）   → 同样被拒
+ *    后果：舞台样式全丢 → canvas 退化成按 width/height 属性（2560×1600 级）撑开页面
+ *         → 表现为「页面底部一大片空白、看不到动画」。
+ *    ✅ 正确做法：样式写进同源 .css 文件，由页面 <link> 引入（style-src 'self' 放行），JS 只切 class。
+ *    新增主题色请在下方「7 天主题色」区按 is-<themeId> 加一组，不要改 JS 里的样式。
+ */
+
+/* 权衡度量体：只截取 7 条每日舞台文案，完整授权见 fonts/QuanHengDuLiang-LICENSE.txt。 */
+@font-face {
+  font-family: "WxgcQuanHengStage";
+  src: url("/creator-workbench/assets/6403c67b6dfc8f8ba10f.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---------- 舞台骨架 ---------- */
+.wxgc-stage {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 42%, rgba(13, 18, 32, .82) 0%, rgba(5, 8, 15, .94) 100%);
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .38s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.wxgc-stage.is-on { opacity: 1; }
+
+.wxgc-stage-glow {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(78vw, 760px);
+  height: min(44vw, 420px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* canvas 必须显式给 CSS 尺寸，否则会按 width/height 属性（设备像素级）撑开页面 */
+.wxgc-stage canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.wxgc-stage-copy {
+  position: relative;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(16px) scale(.96);
+  transition: transform .55s cubic-bezier(.2, .9, .3, 1), opacity .55s ease;
+}
+.wxgc-stage.is-on .wxgc-stage-copy { transform: none; opacity: 1; }
+
+.wxgc-stage-label {
+  display: block;
+  font-size: 14px;
+  letter-spacing: .42em;
+  text-indent: .42em;
+}
+
+.wxgc-stage-headline {
+  display: block;
+  margin-top: 14px;
+  font-family: "WxgcQuanHengStage", "STKaiti", "KaiTi", serif;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: 1.36;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: .09em;
+  text-indent: .09em;
+}
+
+.wxgc-stage-skip {
+  position: absolute;
+  left: 50%;
+  bottom: 4.5vh;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: .2em;
+  color: rgba(255, 255, 255, .55);
+  pointer-events: none;
+  animation: wxgc-stage-blink 1.6s ease-in-out infinite;
+}
+@keyframes wxgc-stage-blink { 0%, 100% { opacity: .45; } 50% { opacity: .95; } }
+
+/* ---------- 7 天主题色（JS 只加 is-<themeId> 类） ---------- */
+/* 周一 · 火箭冲天 */
+.wxgc-stage.is-rocket .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(91, 141, 239, .22), transparent); }
+.wxgc-stage.is-rocket .wxgc-stage-label { color: #5b8def; text-shadow: 0 0 14px #5b8def; }
+.wxgc-stage.is-rocket .wxgc-stage-headline { text-shadow: 0 0 26px #5b8def, 0 0 60px #8ac24a, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周二 · 智慧树 */
+.wxgc-stage.is-tree .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(47, 158, 99, .22), transparent); }
+.wxgc-stage.is-tree .wxgc-stage-label { color: #2f9e63; text-shadow: 0 0 14px #2f9e63; }
+.wxgc-stage.is-tree .wxgc-stage-headline { text-shadow: 0 0 26px #2f9e63, 0 0 60px #8ac24a, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周三 · 云端彩虹 */
+.wxgc-stage.is-rainbow .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(124, 108, 240, .22), transparent); }
+.wxgc-stage.is-rainbow .wxgc-stage-label { color: #7c6cf0; text-shadow: 0 0 14px #7c6cf0; }
+.wxgc-stage.is-rainbow .wxgc-stage-headline { text-shadow: 0 0 26px #7c6cf0, 0 0 60px #f2c94c, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周四 · 金币雨 */
+.wxgc-stage.is-coins .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(217, 180, 48, .22), transparent); }
+.wxgc-stage.is-coins .wxgc-stage-label { color: #d9b430; text-shadow: 0 0 14px #d9b430; }
+.wxgc-stage.is-coins .wxgc-stage-headline { text-shadow: 0 0 26px #d9b430, 0 0 60px #f2c94c, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周五 · 烟花庆典 */
+.wxgc-stage.is-party .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(242, 89, 127, .22), transparent); }
+.wxgc-stage.is-party .wxgc-stage-label { color: #f2597f; text-shadow: 0 0 14px #f2597f; }
+.wxgc-stage.is-party .wxgc-stage-headline { text-shadow: 0 0 26px #f2597f, 0 0 60px #f2c94c, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周六 · 星空夜 */
+.wxgc-stage.is-stars .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(111, 168, 255, .22), transparent); }
+.wxgc-stage.is-stars .wxgc-stage-label { color: #6fa8ff; text-shadow: 0 0 14px #6fa8ff; }
+.wxgc-stage.is-stars .wxgc-stage-headline { text-shadow: 0 0 26px #6fa8ff, 0 0 60px #b28dff, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* 周日 · 灯笼暖光 */
+.wxgc-stage.is-lanterns .wxgc-stage-glow { background: radial-gradient(closest-side, rgba(242, 135, 79, .22), transparent); }
+.wxgc-stage.is-lanterns .wxgc-stage-label { color: #f2874f; text-shadow: 0 0 14px #f2874f; }
+.wxgc-stage.is-lanterns .wxgc-stage-headline { text-shadow: 0 0 26px #f2874f, 0 0 60px #f2c94c, 0 2px 12px rgba(0, 0, 0, .6); }
+
+/* ---------- 手机降级 ---------- */
+@media (max-width: 720px) {
+  .wxgc-stage-copy { padding: 0 20px; }
+  .wxgc-stage-headline {
+    font-size: clamp(34px, 10vw, 50px);
+    line-height: 1.42;
+    letter-spacing: .05em;
+    text-indent: .05em;
+  }
+  .wxgc-stage-label { font-size: 12px; letter-spacing: .3em; text-indent: .3em; }
+  .wxgc-stage-skip { font-size: 11px; }
+}

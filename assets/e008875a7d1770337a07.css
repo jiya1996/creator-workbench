@@ -1,0 +1,35 @@
+#settings-ima { margin-top: 24px; scroll-margin-top: 100px; }
+.settings-nav [hidden] { display: none; }
+#settings-calendar .credential-card { min-width: 0; }
+#settings-calendar .calendar-setup-guide { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin: 14px 0; }
+#settings-calendar .calendar-setup-guide .credential-links { flex: 0 0 auto; margin: 0; }
+#settings-calendar .calendar-setup-guide .credential-security { flex: 1 1 420px; min-width: 0; margin: 0; }
+#settings-calendar .credential-actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; }
+#settings-calendar .credential-field-row + .credential-actions,
+#settings-calendar .meeting-field + .credential-actions { margin-top: 18px; }
+#settings-calendar .credential-actions .meeting-primary,
+#settings-calendar .calendar-choice .meeting-primary { flex: 0 0 auto; width: auto; min-width: 132px; min-height: 42px; padding: 10px 20px; }
+#settings-calendar .calendar-status-panel { margin-top: 18px; padding: 16px; border: 1px solid rgba(0, 168, 90, .2); border-radius: 14px; background: #edf9f2; }
+#settings-calendar .calendar-status-panel .form-status { margin: 0; }
+#settings-calendar .calendar-status-panel .calendar-connection-list:not(:empty) { margin: 12px 0 0; }
+#settings-calendar .calendar-status-panel .calendar-connection { background: rgba(255,255,255,.78); }
+#settings-calendar .calendar-connection-list:not(:empty) { display: grid; gap: 8px; margin: 14px 0; }
+#settings-calendar .calendar-connection { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 11px 14px; border: 1px solid var(--line, #d5e8dd); border-radius: 12px; background: var(--surface, #f8fcfa); }
+#settings-calendar .calendar-connection-badge { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; color: var(--ink, #183c32); }
+#settings-calendar .calendar-connection-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #d79c43; }
+#settings-calendar .calendar-connection-badge.is-connected::before { background: #00a85a; }
+#settings-calendar .calendar-connection-badge.is-expired::before { background: #b87373; }
+#settings-calendar .calendar-connection-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#settings-calendar .calendar-action { appearance: none; border: 1px solid var(--line, #cfe7d9); background: transparent; color: var(--accent, #008d50); border-radius: 9px; padding: 7px 12px; font: inherit; font-weight: 600; cursor: pointer; }
+#settings-calendar .calendar-action:hover { background: rgba(0, 168, 90, .07); }
+#settings-calendar .calendar-action.is-remove { color: var(--muted, #60766d); }
+#settings-calendar .calendar-choice { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; margin-top: 18px; padding: 16px; border: 1px solid var(--line, #d5e8dd); border-radius: 12px; background: var(--surface, #f8fcfa); }
+#settings-calendar .calendar-choice[hidden] { display: none; }
+#settings-calendar .calendar-choice .meeting-field { flex: 1 1 260px; min-width: 0; margin: 0; }
+#settings-calendar code { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  #settings-calendar .calendar-connection { align-items: flex-start; }
+  #settings-calendar .calendar-choice { align-items: stretch; }
+  #settings-calendar .calendar-choice .meeting-field { flex-basis: 100%; }
+  #settings-calendar .calendar-choice .meeting-primary { width: 100%; }
+}

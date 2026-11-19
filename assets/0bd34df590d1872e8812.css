@@ -1,0 +1,207 @@
+/* Layout only. Fields, selects, tables, dialogs and buttons reuse shortlink-manage.css. */
+body[data-page="daily-preparation"] { --sl-surface:color-mix(in srgb,var(--paper-solid) 90%,transparent); --sl-border:var(--line); --sl-shadow:0 14px 38px color-mix(in srgb,var(--brand-deep) 7%,transparent); font-size:var(--font-16); line-height:1.7; }
+.dp-shell [hidden] { display:none!important; }
+.dp-overview { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:10px 4px; }
+.dp-overview strong { font-size:var(--font-20); }
+.dp-actions { display:flex; align-items:end; flex-wrap:wrap; gap:12px; margin:14px 0; }
+.dp-creative-structure { display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap; }
+/* 序号跟着「选结构」走（用户 2026-10-30）：窄屏时它原本是独立的 flex 项，会孤零零占一行。 */
+.dp-creative-structure > .dp-structure { flex:1 1 auto; min-width:0; }
+.dp-creative-structure .dp-structure-label strong { color:var(--ink); font-size:var(--font-16); }
+.dp-actions .pm-field { flex:1; min-width:180px; }
+/* 后台表单控件统一复用系统页的 .setting-input 外框（与「每周行动与微信运行配置」同一套 class，
+   不复制任何边框/圆角/底色属性）。外框是 flex 容器，这里只补标签与控件之间的间距。 */
+.dp-shell .pm-field > .setting-input { margin-top:7px; }
+.dp-shell .dp-check { display:flex; gap:10px; align-items:start; font-weight:400; }
+.dp-shell .dp-check input { width:20px; height:20px; min-height:20px; flex:none; padding:0; margin-top:3px; accent-color:var(--brand); }
+.dp-note { padding:18px 20px; border:1px solid var(--line); border-radius:16px; background:color-mix(in srgb,var(--brand) 6%,var(--paper-solid)); font-size:var(--font-14); }
+.dp-note p { margin:6px 0; }
+.dp-details { border:1px solid var(--line); border-radius:16px; padding:16px 20px; margin:16px 0; background:var(--paper-solid); }
+.dp-details summary { cursor:pointer; color:var(--brand-deep); font-weight:600; }
+.dp-detail-body { padding-top:18px; }
+/* 未保存内容的恢复提示（2026-10-20）：换稿素材/备稿设置会自动留在本机，
+   回来时这里说明「这是草稿，不是已保存的设置」，并给一个放弃入口。 */
+.dp-draft-note { margin:0; padding:11px 14px; border-radius:13px; color:#7a5a1f; background:#fff8e8; border:1px solid rgba(207,153,70,.24); font-size:var(--font-14); line-height:1.65; }
+.dp-draft-note button { margin-left:4px; padding:0; border:0; color:var(--brand-deep); background:transparent; font:inherit; font-weight:700; text-decoration:underline; cursor:pointer; }
+.dp-draft-note button:hover { text-decoration:none; }
+.dp-options { display:flex; flex-wrap:wrap; gap:16px 24px; }
+.dp-shell fieldset { min-width:0; border:1px solid var(--line); border-radius:14px; padding:18px; }
+.dp-shell legend { padding:0 8px; font-weight:600; }
+.dp-batch { margin-top:24px; }
+.dp-batch-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; }
+/* 点日期折叠当天（用户 2026-10-21）：日期本身是按钮，收起后只剩「第N条 · 约XX秒 · 标题」清单。 */
+.dp-batch-toggle { display:inline-flex; align-items:center; gap:8px; min-width:0; padding:4px 2px; border:0; border-radius:10px; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.dp-batch-toggle:hover strong { color:var(--brand-deep); }
+.dp-batch-toggle:focus-visible { outline:2px solid var(--brand); outline-offset:3px; }
+/* 「重试一次」要紧跟在「日期 · N条」后面（用户 2026-10-21 指定），
+   不能被 .dp-batch-heading 的 space-between 推到最右边——那里是「补齐今天的稿」的位置。 */
+.dp-batch-heading .dp-batch-retry { margin-right:auto; }
+/* 单条折叠（2026-10-21 用户要求）：点标题收起，只留「第N条 · 约XX秒」和标题并排一行，
+   样子跟整天折叠后的清单一致；正文、来源、操作按钮收起时不显示，展开才回来。
+   用属性选择器而不是 hidden：这堆元素自己声明了 display，hidden 会被它们盖掉。 */
+/* 收起只隐藏正文，**不改布局方向、字号和内边距**（2026-10-21 用户要求：标题位置不变）。
+   之前收起时把卡片改成横排、padding 也缩到 14/18，结果「第N条」和标题并到一行，
+   标题从第二行左侧跳到第一行右侧——点一下整个标题在跳，看着像页面重排而不是收起。
+   现在标题始终在同一个 x/y 上，收起的只是下面的正文，展开时再回来。 */
+.dp-card[data-card-folded="true"] > *:not(.dp-card-head) { display:none; }
+/* 收起后卡片只剩「第N条」和标题两行，两行都能点开合（用户点的是「同一行」，
+   不该要求他瞄准那个 caret）；键盘仍旧走标题里的按钮。 */
+.dp-card[data-card-folded="true"] .pm-eyebrow,
+.dp-card:not([data-card-folded="true"]) .pm-eyebrow[data-fold-card] { cursor:pointer; }
+.dp-card-toggle { display:flex; align-items:flex-start; gap:10px; width:100%; padding:0; border:0; border-radius:10px; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.dp-card-toggle > span { flex:1; min-width:0; overflow-wrap:anywhere; }
+.dp-card-toggle .dp-fold-caret { flex:none; margin-top:.55em; transition:transform .18s ease; }
+.dp-card[data-card-folded="true"] .dp-card-toggle .dp-fold-caret { transform:rotate(-90deg); }
+.dp-card-toggle:hover > span { color:var(--brand-deep); }
+.dp-card-toggle:focus-visible { outline:2px solid var(--brand); outline-offset:3px; }
+.dp-fold-caret { flex:none; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid currentColor; opacity:.55; transition:transform .18s ease; }
+.dp-batch[data-folded="true"] .dp-fold-caret { transform:rotate(-90deg); }
+/* 用属性选择器而不是 hidden 属性：.dp-grid 自己声明了 display:grid，hidden 会被它覆盖掉。 */
+.dp-batch[data-folded="true"] .dp-grid { display:none; }
+.dp-batch:not([data-folded="true"]) .dp-slim { display:none; }
+.dp-slim { margin:0; padding:0; list-style:none; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--paper-solid); }
+.dp-slim li + li { border-top:1px solid var(--line); }
+.dp-slim-row { display:block; width:100%; padding:13px 16px; border:0; background:transparent; color:inherit; font:inherit; text-align:left; line-height:1.6; overflow-wrap:anywhere; cursor:pointer; }
+.dp-slim-row:hover { color:var(--brand-deep); background:color-mix(in srgb,var(--brand) 6%,transparent); }
+.dp-slim-row:focus-visible { outline:2px solid var(--brand); outline-offset:-2px; }
+/* 每条稿子独占一行（用户 2026-10-19 要求）：口播稿本来就长，两列会把正文挤成窄条反复折行。 */
+.dp-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:18px; }
+.dp-card { display:flex; flex-direction:column; min-width:0; padding:24px; border:1px solid var(--line); border-radius:22px; background:linear-gradient(150deg,var(--paper-solid),color-mix(in srgb,var(--brand) 4%,var(--paper-solid))); box-shadow:var(--sl-shadow); }
+/* 用主题色区分稿件、页面和稿件里的展开区域。 */
+body[data-page="daily-preparation"] .dp-grid > .dp-card,
+body[data-page="daily-preparation"] .dp-grid > [data-slot] > .dp-card {
+  background:linear-gradient(145deg,color-mix(in srgb,var(--brand) 10%,var(--paper-solid)),color-mix(in srgb,var(--brand) 6%,var(--paper-solid)));
+  border-color:color-mix(in srgb,var(--brand) 26%,var(--line));
+}
+body[data-page="daily-preparation"] .dp-grid > .dp-card > .dp-details:not(.dp-old),
+body[data-page="daily-preparation"] .dp-grid > [data-slot] > .dp-card > .dp-details:not(.dp-old) { background:var(--paper-solid); }
+.dp-card h3 { font-size:var(--font-20); margin:14px 0; line-height:1.55; overflow-wrap:anywhere; }
+/* 「待补充事实」贴在标题右侧（用户 2026-10-21 要求）：h3 变成 [标题][标签] 一行。
+   收起时 h3 本身不被隐藏，标签就跟着标题留在原地，不会跳行。 */
+.dp-card h3 { display:flex; align-items:center; gap:10px; }
+.dp-card h3 .dp-card-toggle { flex:1 1 auto; width:auto; min-width:0; }
+.dp-card h3 .dp-title-tag { flex:none; }
+/* 「第N条 · 约XX秒」和标题并成一行（用户 2026-10-21 要求）：原来元信息一行、标题一行，
+   既多占一行高度，读起来也像两件事。包一层头行用 baseline 对齐，卡片顶部只有这一行。
+   窄屏（≤720px）标题本身就快占满一行，并排会被挤成细长条反复折行，那里仍旧上下排。 */
+.dp-card-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; margin:0 0 12px; }
+.dp-card-head > .pm-eyebrow { flex:none; white-space:nowrap; }
+.dp-card-head > h3 { flex:1 1 auto; min-width:0; margin:0; }
+@media(max-width:720px){ .dp-card-head { display:block; margin-bottom:10px; } .dp-card-head > h3 { margin-top:8px; } }
+.dp-card .dp-opening { font-size:var(--font-16); line-height:1.8; margin:12px 0; padding-left:14px; border-left:3px solid var(--brand); }
+.dp-card > .dp-actions { margin-top:auto; padding-top:20px; }
+/* 旧版本入口是这张卡的脚注（用户 2026-10-21 报障：看不出属于哪一条）：
+   去掉外框和底色，只留一条虚线分隔，展开后旧稿再弱化一档，别跟当前版本抢注意力。 */
+.dp-card > .dp-old { margin:18px 0 0; padding:16px 0 0; border:0; border-top:1px dashed var(--line); border-radius:0; background:transparent; }
+.dp-card > .dp-old > summary { color:var(--brand-deep); }
+.dp-old .dp-card { margin-top:14px; padding:16px 18px; border-radius:16px; box-shadow:none; background:color-mix(in srgb,var(--brand) 3%,var(--paper-solid)); }
+.dp-script { white-space:pre-wrap; overflow-wrap:anywhere; font-size:var(--font-16); line-height:1.9; padding:14px 0; }
+/* 选结构（用户 2026-10-20）：把「钩子 → 卡点 → 方法 → 行动」画成一串胶囊，
+   比一句「先抑后扬」更容易被新手照着用。 */
+.dp-structure { display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin:12px 0 6px; }
+/* 「选结构：」跟上面「2 一句话：」用同一套字体（用户 2026-10-30）：16px 加粗正文色。
+   原来是 14px 灰字，夹在几条加粗小标题中间，看着像另一类信息。 */
+.dp-structure-label { flex:none; font-size:var(--font-16); font-weight:700; color:var(--ink); }
+.dp-structure-flow { display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-width:0; }
+.dp-structure-flow b { font-weight:600; font-size:var(--font-14); color:var(--brand-deep); padding:2px 10px; border-radius:999px; border:1px solid color-mix(in srgb,var(--brand) 34%,var(--line)); background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid)); }
+.dp-structure-flow i { font-style:normal; font-size:var(--font-14); color:var(--muted); }
+/* 胶囊和它后面的箭头绑成一个单元：手机上折行时箭头不会孤零零掉到下一行行首 */
+.dp-step { display:inline-flex; align-items:center; gap:6px; }
+@media(max-width:720px){ .dp-structure { flex-direction:column; align-items:flex-start; gap:6px; } .dp-structure-flow { width:100%; } }
+.dp-source { display:block; margin:8px 0; color:var(--brand-deep); font-size:var(--font-14); overflow-wrap:anywhere; }
+.dp-more { margin:8px 0; font-size:var(--font-14); }
+.dp-more summary { cursor:pointer; color:var(--brand-deep); }
+.dp-empty { padding:36px 20px; text-align:center; border:1px dashed var(--line); border-radius:20px; color:var(--muted); }
+.dp-table { min-width:740px; }
+#dp-filter { grid-template-columns:180px 160px minmax(0,1fr) auto; }
+#dp-replace { width:min(600px,calc(100% - 32px)); max-height:85dvh; overflow:auto; }
+#dp-replace textarea { margin:12px 0; resize:vertical; }
+/* 窄屏沿用 sm-table 的卡片化布局：本页的 min-width 必须让位，否则 740px 会把整页撑出横向滚动 */
+@media(max-width:720px){ .dp-table { min-width:0; } }
+@media(max-width:720px){ .dp-overview { align-items:start; flex-direction:column; } #dp-filter { grid-template-columns:1fr; } .dp-card { padding:20px; } .dp-actions { align-items:stretch; flex-wrap:wrap; } .dp-actions .pm-btn { flex:1 1 auto; white-space:nowrap; } .dp-shell .pm-heading { align-items:start; flex-direction:column; } }
+
+/* hero 已去掉左侧图标：文字块成为唯一子元素，shortlink-manage.css 的
+   .pm-hero > div:nth-child(2) 不再命中，这里补回占满宽度与可收缩。 */
+.dp-shell .pm-hero > div { min-width:0; flex:1; }
+
+/* 概览行（「每天自动备稿 / 每天08:00提供」+ 右侧按钮）上下空白各减半（用户 2026-10-19 要求）。
+   原来上方 = hero 的 margin-bottom 18 + 概览条 padding-top 20，下方 = padding-bottom 20 + 下一张卡片 margin-top 18，
+   两边各 38px；现在 9 + 10 = 19px。下面两条必须一起改，只改 padding 会变成上下不等。
+   #dp-settings 在「已开启」后是 hidden 的兄弟节点，所以两种状态都要给一条。 */
+.dp-shell .pm-hero { margin-bottom:9px; }
+.dp-overview + #dp-settings, #dp-settings[hidden] + .pm-panel { margin-top:9px; }
+
+/* 概览条里的模型名是个入口：点开个人设置里的 AI 大模型配置（用户 2026-10-20 要求）。
+   下划线一定要留：这行本来就是灰字，只靠颜色区分「能点」，色弱的人看不出来。 */
+.dp-usage-model { color:var(--brand-deep); font-weight:600; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb,var(--brand) 45%,transparent); }
+.dp-usage-model:hover { text-decoration-color:currentColor; }
+.dp-usage-model:focus-visible { outline:2px solid var(--brand); outline-offset:2px; border-radius:3px; }
+
+/* 次要操作与轻反馈（PRD 8.2 / 8.4）：收起、恢复、「挺像我／不太适合」都不该抢主按钮的位置，
+   所以排在卡片最后一行，做成小胶囊，字号比「用这条」小一号。
+   选中态不只靠颜色：底色 + 边框 + 加粗三重变化，色弱也能分辨（PRD 4.2）。 */
+.dp-minor { display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin:12px 0 0; }
+.dp-tag { padding:2px 10px; border-radius:999px; font-size:var(--font-14); color:var(--muted); border:1px solid var(--line); background:var(--paper-solid); }
+.dp-minor .pm-btn { padding:6px 14px; font-size:var(--font-14); }
+.dp-feedback { display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin:10px 0 0; }
+.dp-feedback-label { font-size:var(--font-14); color:var(--muted); }
+.pm-chip { padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--paper-solid); color:var(--brand-deep); font-size:var(--font-14); line-height:1.6; cursor:pointer; }
+.pm-chip:hover { border-color:color-mix(in srgb,var(--brand) 34%,var(--line)); }
+.pm-chip.is-on { border-color:color-mix(in srgb,var(--brand) 55%,var(--line)); background:color-mix(in srgb,var(--brand) 12%,var(--paper-solid)); font-weight:600; }
+.pm-chip:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+/* 原因跟在「不太适合」后面，用竖线分开，避免看起来像另一组独立按钮 */
+.dp-reasons { display:flex; flex-wrap:wrap; gap:8px; padding-left:8px; border-left:1px solid var(--line); }
+/* 手机上要真点得到：主操作触达区不小于 44px（PRD 4.2） */
+@media(max-width:720px){ .pm-chip, .dp-minor .pm-btn { min-height:44px; padding:8px 16px; } }
+/* 减少动画（PRD 批次 E）：折叠箭头旋转、平滑滚动一律关掉。
+   写法与 shortlink-manage.css 保持一致；JS 里的 scrollIntoView 也已按同一媒体查询改瞬时。 */
+@media(prefers-reduced-motion:reduce){ .dp-shell *, .dp-batch * { transition:none!important; scroll-behavior:auto!important; } }
+/* 运行概况（2026-10-21）：四个核心数字与比率。数字卡跟着列宽自动换行，
+   手机上不会挤成一列；比率为空显示「—」，不让人误读成 0。 */
+.dp-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:10px; margin:14px 0; }
+/* 数值贴底对齐：标签长短不一时，一行里的数字仍站在同一条线上（否则像排版错位） */
+.dp-stat { display:flex; flex-direction:column; justify-content:space-between; gap:4px; padding:11px 13px; border:1px solid var(--line); border-radius:14px; background:color-mix(in srgb,var(--brand) 6%,var(--paper-solid)); }
+/* 运营表格里的日期、数量不许折行：列一挤就会变成「一个字符一行」，比横向滚动更难读 */
+.dp-shell .dp-table td.dp-nowrap,.dp-shell .dp-table th { white-space:nowrap; }
+/* 运营表单独放开布局：公共 .sm-table 是 table-layout:fixed（短链表那种「首列26%、末列210px」），
+   套到七列的运营表上会把日期与金额压成竖排。这里改回 auto 并给下限，窄了就让容器横向滚动。
+   只在大屏生效：≤720px 是卡片化布局，不能被 min-width 拖出横向滚动条。 */
+@media(min-width:721px){
+  .dp-shell .dp-table.dp-ops-table { table-layout:auto; min-width:1020px; }
+  .dp-shell .dp-table.dp-ops-table th:first-child,.dp-shell .dp-table.dp-ops-table th:last-child { width:auto; }
+  .dp-shell .dp-table.dp-ops-table td { padding:12px 14px; }
+}
+/* 模型名可能很长（provider · modelId），截断而不是折成三行 */
+.dp-model { display:inline-block; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+/* 手机上筛选行：两个日期放同一行，否则「从…」「到…」各占一整行、把下面推得很远 */
+@media(max-width:720px){
+  .dp-shell #da-overview-filter .pm-field { min-width:132px; }
+  .dp-shell #da-overview-filter button[type=submit] { width:100%; }
+}
+.dp-stat-label { display:flex; flex-direction:column; color:var(--muted); font-size:var(--font-12); line-height:1.5; }
+.dp-stat-label .pm-muted { font-size:var(--font-12); }
+.dp-stat strong { font-size:var(--font-16); }
+
+/* 备稿记录：调用记录行内展开（2026-10-21）—— 原行高亮 + 左侧竖线，指明「这批调用属于上面这一行」 */
+.dp-shell tr.is-open>td{background:color-mix(in srgb,var(--brand) 9%,var(--paper-solid))}
+.dp-shell tr.is-open>td:first-child{box-shadow:inset 3px 0 0 var(--brand)}
+.dp-run-detail-row>td{padding:0 14px 16px;background:var(--paper-solid)}
+.dp-run-detail{margin-top:-4px;padding:12px 16px;border-left:3px solid var(--brand);border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--brand) 6%,var(--paper-solid))}
+.dp-run-detail-head{margin:0 0 8px;font-weight:700}
+.dp-run-item{padding:10px 0;border-top:1px dashed var(--line)}
+.dp-run-item:first-of-type{border-top:0;padding-top:0}
+.dp-run-item p{margin:0 0 4px}
+.dp-run-item p:last-child{margin-bottom:0}
+
+.dp-recommendation { margin:14px 0; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--paper-solid); }
+.dp-recommend-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; color:var(--brand-deep); font-size:var(--font-16); }
+.dp-score-list { padding-inline-start:20px; color:var(--ink); font-size:var(--font-14); line-height:1.8; }
+.dp-score-list li { margin:0 0 8px; overflow-wrap:anywhere; }
+.dp-score-list li span { color:var(--muted); }
+.dp-creative-card,.dp-fact-review{margin-top:.75rem}
+.dp-creative-card p,.dp-fact-review p{line-height:1.65}
+.dp-fact-review ul{padding-left:1.35rem;line-height:1.7}
+/* 「脚本拆解」收进「看看完整稿子」里面（用户 2026-10-30 要求）：读稿的顺序是先看正文、
+   到最后再了解这条是怎么写的。里面再套一层带边框的卡片会像另起一张卡，所以只留一条虚线。 */
+.dp-script-block > .dp-creative-card { margin:4px 0 0; padding:14px 0 0; border:0; border-top:1px dashed var(--line); border-radius:0; background:transparent; }
+.dp-script-block > .dp-creative-card > summary { color:var(--brand-deep); }

@@ -1,0 +1,101 @@
+/* Styles belong to this module only. Surfaces and text follow the member theme. */
+.vss { container-type: inline-size; grid-column: 1 / -1; width: 100%; min-width: 0; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); color: var(--ink); font-size: var(--font-16); line-height: 1.6; }
+.vss *, .vss *::before, .vss *::after { box-sizing: border-box; }
+.vss [hidden] { display: none !important; }
+.vss button { font: inherit; color: inherit; cursor: pointer; }
+.vss button:focus-visible, .vss input:focus-visible, .vss textarea:focus-visible { outline: 2px solid var(--brand-deep); outline-offset: 3px; }
+.vss .vss-toggle { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 74px; padding: 12px 20px; text-align: left; border: 0; border-radius: 20px; background: transparent; }
+.vss .vss-toggle:disabled { cursor: default; }
+.vss .vss-toggle-copy { flex: 1; min-width: 0; }
+.vss .vss-toggle-copy strong { display: block; font-size: var(--font-18); }
+.vss .vss-toggle-copy small { display: block; color: var(--muted); font-size: var(--font-14); }
+.vss .vss-toggle-action { display: flex; align-items: center; flex: none; gap: 8px; color: var(--brand-deep); font-size: var(--font-14); }
+.vss .vss-icon { width: 34px; height: 34px; flex: none; color: var(--brand-deep); }
+.vss .vss-body { padding: 20px; border-top: 1px solid var(--line); }
+.vss .vss-intro { margin: 0 0 20px; color: var(--muted); }
+.vss .vss-columns { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; }
+.vss .vss-controls, .vss .vss-preview { min-width: 0; }
+.vss .vss-setting { margin-bottom: 24px; }
+.vss h3 { margin: 0 0 14px; font-size: var(--font-18); line-height: 1.6; font-weight: 600; }
+.vss .vss-step { display: inline-block; margin-right: 8px; color: var(--brand-deep); }
+.vss .vss-types { display: grid; gap: 10px; }
+.vss .vss-type { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 68px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; text-align: left; background: var(--paper-solid); transition: border-color 180ms, box-shadow 180ms; }
+.vss .vss-type > span:not(.vss-choice) { flex: 1; min-width: 0; }
+.vss .vss-type strong { display: block; font-size: var(--font-16); font-weight: 600; }
+.vss .vss-type small { display: block; font-size: var(--font-14); color: var(--muted); }
+.vss .vss-type-icon { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; color: var(--muted); }
+.vss .vss-choice { visibility: hidden; flex: none; color: var(--brand-deep); font-weight: 700; }
+.vss .vss-type[aria-pressed=true] { border-color: var(--brand-deep); box-shadow: inset 0 0 0 1px var(--brand-deep); }
+.vss .vss-type[aria-pressed=true] .vss-choice { visibility: visible; }
+.vss .vss-duration-value { margin: 0 0 8px; }
+.vss .vss-duration-value strong { margin-left: 8px; color: var(--brand-deep); font-size: var(--font-20); font-variant-numeric: tabular-nums; }
+.vss .vss-controls input[type=range] { display: block; width: 100%; min-height: 44px; margin: 0; padding: 0; border: 0; background: transparent; accent-color: var(--brand-deep); cursor: pointer; }
+.vss .vss-slider-labels, .vss .vss-axis { display: flex; justify-content: space-between; gap: 16px; font-size: var(--font-14); color: var(--muted); font-variant-numeric: tabular-nums; }
+.vss .vss-slider-labels { margin-bottom: 14px; }
+.vss .vss-times { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
+.vss .vss-times button { min-width: 0; min-height: 44px; padding: 8px 2px; border: 1px solid var(--line); border-radius: 10px; font-size: var(--font-16); background: var(--paper-solid); }
+.vss .vss-times button[aria-pressed=true] { border-color: var(--brand-deep); font-weight: 600; box-shadow: inset 0 0 0 1px var(--brand-deep); }
+.vss .vss-more-times { grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 8px; }
+.vss .vss-more { min-height: 44px; margin-top: 10px; padding: 8px 0; text-align: left; border: 0; background: transparent; color: var(--brand-deep); font-size: var(--font-14); }
+.vss .vss-tip { margin: 14px 0; color: var(--muted); font-size: var(--font-14); line-height: 1.7; }
+.vss .vss-recommendation { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 12px; }
+.vss .vss-recommendation strong { font-size: var(--font-18); font-weight: 600; }
+.vss .vss-recommendation span { color: var(--muted); font-size: var(--font-14); }
+.vss .vss-timeline-caption { margin: 0; font-size: var(--font-14); color: var(--muted); }
+.vss .vss-timeline { display: block; width: 100%; height: 52px; overflow: visible; }
+.vss .vss-timeline-segment { cursor: pointer; }
+.vss .vss-timeline-segment rect { fill: var(--vss-color); stroke: transparent; stroke-width: 2; transition: stroke 180ms; }
+.vss .vss-timeline-segment[aria-pressed=true] rect { stroke: var(--ink); stroke-dasharray: 5 2; }
+.vss .vss-timeline-segment:focus-visible { outline: none; }
+.vss .vss-timeline-segment:focus-visible rect { stroke: var(--ink); stroke-width: 3; stroke-dasharray: none; }
+.vss .vss-axis { margin-bottom: 14px; }
+.vss .vss-segments { display: grid; gap: 8px; }
+.vss .vss-segment { display: grid; grid-template-columns: 28px minmax(0,1fr) auto auto; align-items: center; column-gap: 10px; row-gap: 2px; width: 100%; min-height: 50px; padding: 10px 12px; text-align: left; border: 1px solid var(--line); border-left: 4px solid var(--vss-color); border-radius: 10px; background: var(--paper-solid); transition: box-shadow 180ms; }
+.vss .vss-segment[aria-pressed=true] { box-shadow: inset 0 0 0 1px var(--brand-deep); border-top-color: var(--brand-deep); border-right-color: var(--brand-deep); border-bottom-color: var(--brand-deep); }
+.vss .vss-number { color: var(--muted); font-size: var(--font-14); font-variant-numeric: tabular-nums; }
+.vss .vss-segment[aria-pressed=true] .vss-number { color: var(--brand-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.vss .vss-segment-time, .vss .vss-segment-length { color: var(--muted); font-size: var(--font-14); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vss .vss-detail { margin-top: 20px; padding: 18px; border: 1px solid var(--line); border-left: 4px solid var(--vss-color); border-radius: 12px; background: var(--paper-solid); overflow-wrap: anywhere; }
+.vss .vss-detail h4 { margin: 0 0 4px; font-size: var(--font-18); font-weight: 600; line-height: 1.6; }
+.vss .vss-detail-time { margin: 0 0 12px; font-size: var(--font-14); color: var(--muted); }
+.vss .vss-opening-note { margin: 12px 0; font-size: var(--font-14); color: var(--brand-deep); }
+.vss .vss-detail dl { margin: 0; }
+.vss .vss-detail dt { margin: 12px 0 4px; font-weight: 600; }
+.vss .vss-detail dd { margin: 0; }
+.vss .vss-sample { padding: 10px 12px; border-radius: 8px; background: var(--paper); }
+.vss .vss-example-note { margin: 14px 0 0; font-size: var(--font-14); color: var(--muted); }
+.vss .vss-copy { max-width: 100%; }
+.vss .vss-status { min-height: 0; margin: 12px 0 0; color: var(--brand-deep); font-size: var(--font-14); }
+.vss .vss-status:empty { display: none; }
+.vss .vss-manual { margin-top: 14px; }
+.vss .vss-manual textarea { width: 100%; max-width: 100%; margin: 10px 0; font-size: var(--font-16); }
+.vss .vss-color-hook { --vss-color: #E3A04F; }
+.vss .vss-color-scene { --vss-color: #6BA9C4; }
+.vss .vss-color-problem { --vss-color: #DB8D86; }
+.vss .vss-color-action { --vss-color: #72AE95; }
+.vss .vss-color-feel { --vss-color: #A48AC6; }
+.vss .vss-color-other { --vss-color: #90A4B5; }
+@container (min-width: 860px) {
+  .vss .vss-body { padding: 24px; }
+  .vss .vss-columns { grid-template-columns: minmax(280px,360px) minmax(0,1fr); }
+  .vss .vss-controls { max-width: 360px; }
+}
+@container (max-width: 540px) {
+  .vss .vss-segment { grid-template-columns: 28px minmax(0,1fr) auto; }
+  .vss .vss-segment-title { grid-column: 2 / -1; }
+  .vss .vss-segment-time { grid-column: 2; }
+  .vss .vss-segment-length { grid-column: 3; }
+}
+@container (max-width: 400px) {
+  .vss .vss-toggle { gap: 10px; padding: 12px 14px; }
+  .vss .vss-icon { width: 24px; height: 24px; }
+  .vss .vss-toggle-copy strong { font-size: var(--font-16); }
+  .vss .vss-toggle-action { gap: 4px; }
+  .vss .vss-body { padding: 16px; }
+  .vss .vss-detail { padding: 14px; }
+  .vss .vss-times { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .vss .vss-more-times { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vss .vss-type, .vss .vss-segment, .vss .vss-timeline-segment rect { transition: none; }
+}

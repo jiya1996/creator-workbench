@@ -1,0 +1,204 @@
+.role-content{max-width:1120px;margin:0 auto;padding:24px 32px 64px;color:var(--ink);font:16px/1.65 'Microsoft YaHei','PingFang SC',system-ui,sans-serif}
+.role-content *,.role-dialog *{box-sizing:border-box}.role-content h2,.role-dialog h2{font-size:24px;line-height:1.4;margin:0 0 12px}.role-content h3{font-size:18px;margin:0 0 8px}.role-content p{margin:10px 0}.role-small,.role-content small{font-size:14px;color:var(--muted);line-height:1.6}.role-card{border:1px solid var(--line);background:var(--paper);border-radius:22px;padding:28px;margin-bottom:20px;min-width:0}.role-hero{padding:36px;background:linear-gradient(125deg,color-mix(in srgb,var(--brand) 8%,var(--paper-solid)),var(--paper));border-color:color-mix(in srgb,var(--brand) 22%,transparent)}
+.role-hero h2{font-size:32px;max-width:760px;letter-spacing:-.03em}.role-eyebrow{display:block;color:var(--brand);font-size:14px;letter-spacing:.1em;margin-bottom:12px;font-weight:700}.role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.role-grid .role-card{margin-bottom:0}.role-section{margin:28px 0}.role-section>h2{font-size:20px;margin-bottom:16px}.role-list{padding-left:22px;margin:10px 0}.role-list li{margin:6px 0;overflow-wrap:anywhere}.role-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:20px}.role-actions a{color:var(--brand)}
+.role-content button,.role-dialog button,.role-link{font:inherit;min-height:44px;border:1px solid var(--line);background:var(--paper-solid);color:var(--ink);padding:10px 18px;border-radius:12px;cursor:pointer;text-decoration:none}.role-content button:hover,.role-link:hover{border-color:var(--brand)}.role-content .role-primary,.role-dialog .role-primary{background:var(--brand);color:white;border-color:var(--brand);font-weight:700}.role-content button:disabled,.role-dialog button:disabled{cursor:wait;opacity:.6}.role-content :focus-visible,.role-dialog :focus-visible{outline:3px solid var(--brand);outline-offset:3px}.role-check{display:flex;align-items:flex-start;gap:10px;margin-top:20px}.role-check input{margin-top:6px;accent-color:var(--brand);width:18px;height:18px;flex:none}
+#role-status{font-size:14px;min-height:24px;margin:0 0 14px}#role-status[data-error=true]{color:var(--brand-deep);background:color-mix(in srgb,var(--brand) 10%,var(--paper));border-radius:10px;padding:12px}.role-question{max-width:780px;margin:0 auto}.role-question h2{margin:28px 0;font-size:24px}.role-progress{width:100%;height:7px;accent-color:var(--brand)}.role-question-head{display:flex;justify-content:space-between;gap:16px;font-size:14px}.role-options{display:grid;gap:12px}.role-options button{display:flex;align-items:center;gap:16px;text-align:left;padding:15px 18px;min-height:56px}.role-option-dot{display:inline-block;width:18px;height:18px;border:1px solid var(--line);border-radius:50%;flex:none}.role-options button[aria-pressed=true]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid));font-weight:700}.role-options button[aria-pressed=true] .role-option-dot{background:var(--brand);border-color:var(--brand);box-shadow:inset 0 0 0 4px var(--paper-solid)}
+.role-chair{border-top:3px solid var(--brand)}.role-chair h3{font-size:28px}.role-summary{font-size:18px}.role-radar{width:100%;max-width:400px;display:block;margin:auto;overflow:visible}.role-radar text{font-size:14px;fill:var(--ink)}.role-radar polygon{stroke:var(--line);fill:none}.role-radar .role-shape{stroke:var(--brand);fill:color-mix(in srgb,var(--brand) 17%,transparent);stroke-width:2}.role-score-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:8px 0}.role-score-row progress{grid-column:1/-1;width:100%;height:7px;accent-color:var(--brand)}.role-tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.role-dialog{max-width:560px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:22px;padding:28px;background:var(--paper-solid);color:var(--ink);font:16px/1.65 system-ui,sans-serif;max-height:85dvh;overflow:auto}.role-dialog::backdrop{background:rgba(20,30,45,.45);backdrop-filter:blur(3px)}
+.role-admin-row{display:grid;grid-template-columns:1fr 120px 100px;gap:16px;margin:18px 0;align-items:end}.role-content label>input:not([type=checkbox]),.role-content label>textarea{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:var(--paper-solid);font:inherit;min-height:44px}.role-content label>textarea{min-height:85px;resize:vertical}.role-config-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.role-content details>summary{cursor:pointer;min-height:44px;font-weight:700}.role-content .role-muted{color:var(--muted);font-size:14px}.role-digital-twin{margin-bottom:20px}.role-digital-twin p{font-size:14px}.role-digital-twin .role-actions{margin:12px 0 0}
+.role-radar text{font-size:var(--font-18);font-weight:400;stroke:none;pointer-events:none}
+.role-radar-axis{cursor:pointer;outline:none}
+.role-radar-hit{fill:transparent;stroke:transparent}
+.role-radar-axis.is-selected .role-radar-hit{fill:color-mix(in srgb,var(--brand) 10%,var(--paper-solid));stroke:var(--brand)}
+.role-radar-axis.is-selected text{fill:var(--brand-deep);font-weight:400}
+.role-radar-axis:focus-visible .role-radar-hit{stroke:var(--brand);stroke-width:2}
+.role-radar-dot{fill:var(--brand);pointer-events:none}
+.role-radar-dot.is-selected{stroke:var(--paper-solid);stroke-width:2}
+.role-content .role-score-row{width:100%;text-align:left;font-weight:400;padding:10px 12px;margin-bottom:6px;border-color:transparent;background:transparent}
+.role-content .role-score-row.is-selected{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid))}
+.role-content .role-score-row:hover:not(.is-selected){border-color:var(--line)}
+.role-trait-hint{min-height:45px}
+.role-growth .growth-hero .role-radar text{font-size:14px}
+.role-growth .growth-hero>.role-card{background:color-mix(in srgb,var(--paper-solid) 82%,transparent);border-color:color-mix(in srgb,var(--brand) 14%,var(--line));margin-top:20px}
+.growth-preview-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.growth-preview-points>.role-card{margin:0;padding:18px}.growth-preview-points p{font-size:14px}
+.growth-traits-detail{margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}.growth-traits-detail>summary{color:var(--brand-deep)}.growth-traits-detail>.role-card{margin:12px 0 0;background:var(--paper)}.growth-first-action{margin:18px 0 0;padding:20px}.growth-profile-card>summary h3{display:inline;font-size:18px;margin:0}.growth-profile-card[open]>summary{margin-bottom:12px}.growth-traits-detail .role-trait-hint{min-height:0}
+.growth-reference h4{font-size:14px;line-height:1.6;margin:14px 0 6px;color:var(--brand-deep)}
+.workspace-page[data-page=founder-role] .back-dashboard{white-space:nowrap}.growth-exploration h3{margin-top:22px}.growth-exploration-result{padding:14px 16px;border-radius:12px;background:color-mix(in srgb,var(--brand) 7%,var(--paper-solid));color:var(--brand-deep)}
+.growth-hero{position:relative;border-top:4px solid var(--brand);box-shadow:0 12px 36px color-mix(in srgb,var(--brand) 6%,transparent)}
+.growth-hero h2{font-size:clamp(30px,4vw,44px);letter-spacing:.02em;margin-bottom:4px}.growth-type-motto{font-size:20px;color:var(--brand-deep);font-weight:600}
+.growth-type-tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.growth-type-tags>span{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper-solid);font-size:13px;color:var(--brand-deep)}
+.growth-type-traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0}.growth-type-traits>div{border-top:1px solid var(--line);padding-top:16px}.growth-type-number{display:block;font-size:14px;letter-spacing:0;color:var(--brand);font-weight:700}.growth-type-traits p{font-size:15px;margin:6px 0}
+.growth-type-self{margin:24px 0;padding:18px 22px;border-left:3px solid var(--brand);background:color-mix(in srgb,var(--paper-solid) 80%,transparent);border-radius:0 14px 14px 0}.growth-type-self p{font-size:19px;font-weight:600;margin:6px 0 0}.growth-secondary{font-size:15px}.growth-type-gallery{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
+.growth-type-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 18px}.growth-type-grid>article{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--paper)}.growth-type-grid>article.is-current{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid))}.growth-type-grid h3{font-size:16px}.growth-type-grid p{font-size:14px}
+.growth-fold[open]>summary{padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}.growth-fold:not([open]){padding-top:16px;padding-bottom:12px}.growth-cooperation>.growth-preview-points{margin-top:16px}.growth-reference .role-card h3{margin-top:8px}.growth-reference .role-card{border-top:2px solid color-mix(in srgb,var(--brand) 45%,var(--line))}
+@media(max-width:700px){.growth-type-traits{grid-template-columns:1fr;gap:8px;margin:18px 0}.growth-type-traits>div{display:block;padding-top:12px}.growth-type-self{padding:14px 16px;margin:18px 0}.growth-type-self p{font-size:17px}.growth-type-motto{font-size:17px}.growth-type-grid{grid-template-columns:1fr}.growth-type-tags>span{font-size:12px}}
+/* ── 05 七天 → 06 九十天：一条竖线把两段串成同一条路线 ──
+   视觉语言对齐左侧菜单分组线（2px + brand 渐变 + 低透明度），节点用实心纸色圆点压在线上的方式。
+   ⚠️ 圆点位置全部由 --tl-line / --tl-pad 两个变量算出，改任一都必须一起改，否则节点会离线。 */
+.growth-timeline{--tl-line:7px;--tl-pad:26px;position:relative;margin:30px 0 8px;padding-left:var(--tl-pad)}
+.growth-timeline::before{content:'';position:absolute;left:calc(var(--tl-line) - 1px);top:16px;bottom:16px;width:2px;border-radius:2px;pointer-events:none;background:linear-gradient(to bottom,color-mix(in srgb,var(--brand) 60%,transparent),color-mix(in srgb,var(--brand) 26%,transparent) 70%,color-mix(in srgb,var(--brand) 10%,transparent))}
+.growth-timeline>.growth-stage{position:relative;margin:0 0 28px}
+.growth-timeline>.growth-stage:last-child{margin-bottom:0}
+.growth-timeline>.growth-stage::before{content:'';position:absolute;left:calc(var(--tl-line) - var(--tl-pad) - 5px);top:7px;width:10px;height:10px;border-radius:50%;background:var(--paper-solid);border:2px solid color-mix(in srgb,var(--brand) 50%,var(--line))}
+.growth-timeline>.growth-stage:first-child::before{background:var(--brand);border-color:var(--brand)}
+.growth-timeline>.growth-stage>h2{font-size:20px;margin-bottom:16px}
+@media(max-width:700px){.growth-timeline{--tl-pad:20px;margin-top:24px}.growth-timeline>.growth-stage{margin-bottom:22px}}
+/* ── 组内再串一层：7 天逐天、3 个月逐月，线条更细更淡，形成「主路线 → 步骤」两级层次 ── */
+/* ⚠️ 线的中心固定在阶段内左侧 10px，卡片缩进由 --sub-pad 控制；两者联动，改缩进不会让线歪。 */
+#growth-week,#growth-months{--sub-pad:24px}
+#growth-week .growth-day,#growth-months>.growth-month{position:relative;margin-left:var(--sub-pad)}
+#growth-week .growth-day::before,#growth-months>.growth-month::before{content:'';position:absolute;left:calc(10px - var(--sub-pad) - 1px);top:16px;bottom:-16px;width:2px;border-radius:2px;pointer-events:none;background:linear-gradient(to bottom,color-mix(in srgb,var(--brand) 32%,transparent),color-mix(in srgb,var(--brand) 16%,transparent))}
+#growth-week .growth-day:last-of-type::before,#growth-months>.growth-month:last-of-type::before{display:none}
+#growth-week .growth-day::after,#growth-months>.growth-month::after{content:'';position:absolute;left:calc(10px - var(--sub-pad) - 5.5px);top:14px;width:8px;height:8px;border-radius:50%;pointer-events:none;background:var(--paper-solid);border:1.5px solid color-mix(in srgb,var(--brand) 40%,var(--line))}
+@media(max-width:700px){#growth-week,#growth-months{--sub-pad:18px}#growth-week .growth-day::before,#growth-months>.growth-month::before{top:14px}}
+.growth-notice{position:relative;min-height:24px;line-height:1.65;overflow-wrap:anywhere;color:var(--brand-deep);scroll-margin-top:110px}.growth-notice:not(:empty){padding:14px 18px;background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid));border:1px solid var(--line);border-radius:14px}.growth-notice[data-error=true],.growth-warning{color:var(--brand-deep);border-left:3px solid var(--brand);padding:10px 14px;background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid))}
+.growth-rights{padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--brand) 6%,var(--paper-solid));font-size:14px}
+.role-content .role-growth label,.role-content .growth-context-form>label{display:block;margin:16px 0;min-width:0;font-weight:500}
+.role-content .role-growth select,.role-content .growth-context-form select{display:block;width:100%;min-width:0;min-height:46px;margin-top:8px;padding:10px 36px 10px 12px;border:1px solid var(--line);border-radius:12px;background-color:var(--paper-solid);color:var(--ink);font:inherit;line-height:1.5;text-overflow:ellipsis}
+.role-growth textarea{line-height:1.6}.growth-business-summary{padding:16px 0;margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.growth-business-summary>summary{color:var(--brand-deep)}.growth-business-summary>.role-link{display:inline-flex;margin-top:12px}
+.growth-section{scroll-margin-top:120px}.growth-jump{display:flex;gap:8px;flex-wrap:wrap;padding:14px;margin:22px 0;border:1px solid var(--line);border-radius:18px;background:var(--paper)}.growth-jump>a{display:block;padding:8px 13px;border-radius:10px;color:var(--brand-deep);text-decoration:none;border:1px solid color-mix(in srgb,var(--brand) 16%,var(--line));font-size:14px;background:var(--paper-solid)}.growth-jump>a:hover{border-color:var(--brand)}
+.growth-statement{padding:12px 18px;margin:10px 0;background:var(--paper);border:1px solid var(--line);border-radius:14px}.growth-statement p{margin:0}.growth-evidence{font-size:14px;color:var(--muted);margin-top:8px}.growth-evidence>summary{font-size:13px;min-height:32px!important;font-weight:400!important}.growth-evidence p{white-space:pre-line;overflow-wrap:anywhere;margin:8px 0}.growth-evidence small{display:block;margin-top:8px}
+.growth-employee{padding:18px 0;border-bottom:1px solid var(--line)}.growth-employee:last-child{border:0}.growth-employee .role-link{display:inline-flex;margin-top:8px}.growth-day>summary{display:list-item!important;line-height:1.5}.growth-day[open]>summary{padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:12px}.growth-day .role-link{display:inline-flex;margin:6px 8px 10px 0}.growth-day .role-actions{margin-top:12px}.role-growth .growth-report-body>section>h2{padding-top:8px}
+@media(max-width:700px){.growth-preview-points{grid-template-columns:1fr}.role-growth .growth-hero .role-grid{grid-template-columns:1fr}.role-growth .growth-hero .role-trait-use{display:none}.role-growth .growth-hero .role-score-row{padding:8px 10px}.growth-jump{gap:6px;padding:10px}.growth-jump>a{padding:7px 10px}.growth-section{scroll-margin-top:105px}.growth-statement{padding:14px}.role-content .role-footer-actions>.role-link{flex:1 1 100%;text-align:center}.role-content .role-footer-actions>button{flex:1 1 calc(50% - 6px);min-width:0}.role-growth .role-actions>button{flex:1 1 100%}}
+.role-content .role-trait-use{grid-column:1/-1;font-size:13px;line-height:1.6}
+@media(max-width:700px){.role-actions.role-footer-actions{row-gap:10px}.role-actions.role-footer-actions>.role-link{flex:1 1 100%;text-align:center}.role-actions.role-footer-actions>button{flex:1 1 calc(50% - 6px);min-width:0;white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14px}}
+.role-share-box{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--brand) 5%,var(--paper-solid))}.role-share-box[hidden]{display:none}.role-share-row{display:flex;align-items:flex-end;gap:12px}.role-share-row label{flex:1;min-width:0;font-size:14px;color:var(--muted)}.role-share-row button{flex:none}.role-share-row input{font-size:14px!important}.role-share-box p{margin-bottom:0}@media(max-width:700px){.role-share-row{flex-direction:column;align-items:stretch}.role-share-box{padding:14px}.role-share-row button{width:100%}}
+@media(max-width:700px){.role-content{padding:18px 16px 40px}.role-card,.role-hero{padding:22px 18px;border-radius:18px}.role-hero h2{font-size:28px}.role-grid{grid-template-columns:1fr;gap:14px}.role-question h2{font-size:20px}.role-chair h3{font-size:24px}.role-actions>button,.role-actions>.role-link{flex:1;white-space:normal}.role-admin-row{grid-template-columns:1fr 1fr}.role-admin-row>label:first-child{grid-column:1/-1}.role-config-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.role-dialog{padding:22px}}
+/* ── 折叠提示：左侧自绘可点箭头 + 标题后紧跟「展开 ▾ / 收起 ▴」胶囊 ── */
+/* ⛔ 原生 marker 是 outside 定位，会落在卡片 padding 区（summary 盒子外），
+   会员点上去命中的是 details 而不是 summary → 看着像箭头，点了一点反应都没有。
+   所以隐藏原生 marker，自己画在 summary 的 padding 里，点箭头 = 点标题。 */
+.role-growth details>summary{position:relative;list-style:none;padding-left:20px}
+.role-growth details>summary::-webkit-details-marker{display:none}
+.role-growth details>summary::marker{content:''}
+.role-growth details>summary::before{content:'▸';position:absolute;left:2px;top:2px;color:var(--brand);font-size:14px;line-height:1.5;pointer-events:none}
+.role-growth details[open]>summary::before{content:'▾'}
+.role-growth details>summary::after{content:'展开 ▾';display:inline-block;vertical-align:middle;margin-left:10px;padding:2px 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--brand) 52%,transparent);background:color-mix(in srgb,var(--brand) 12%,var(--paper-solid));color:var(--ink);font-size:12px;font-weight:700;line-height:1.6;letter-spacing:.02em;white-space:nowrap;pointer-events:none;transition:background-color .16s ease,color .16s ease,border-color .16s ease}
+.role-growth details[open]>summary::after{content:'收起 ▴';border-color:var(--line);background:color-mix(in srgb,var(--ink) 6%,var(--paper-solid));color:var(--muted)}
+.role-growth details>summary:hover::after{background:var(--brand);border-color:var(--brand);color:#fff}
+.role-growth details[open]>summary:hover::after{background:color-mix(in srgb,var(--ink) 14%,var(--paper-solid));border-color:var(--line);color:var(--ink)}
+/* 13px 的「这条建议参考了什么」这类小字，胶囊同步缩一档 */
+.growth-evidence>summary{padding-left:16px}.growth-evidence>summary::before{font-size:12px;top:1px}.growth-evidence>summary::after{font-size:11px;padding:1px 7px;margin-left:8px}
+.role-growth details>summary:focus-visible::after{border-color:var(--brand);background:var(--brand);color:#fff}
+@media(max-width:700px){.role-growth details>summary::after{font-size:11px;padding:1px 7px;margin-left:7px}.growth-evidence>summary::after{font-size:10.5px;padding:1px 6px;margin-left:6px}}
+/* 按钮正下方的表单反馈：空着不占位，有内容时轻轻亮一下把视线拉回来 */
+.growth-notice-local{margin:14px 0 0;scroll-margin-top:120px}
+.growth-notice-local:empty{display:none}
+.growth-notice-local:not(:empty){animation:growthNoticeIn .28s ease-out both}
+@keyframes growthNoticeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.growth-notice-local:not(:empty){animation:none}}
+/* 报告说明只当注释：字号降一档、颜色压淡，不跟正文模块抢注意力 */
+.growth-notes{margin-top:26px;padding:18px 22px;background:color-mix(in srgb,var(--ink) 3%,var(--paper-solid));border-color:color-mix(in srgb,var(--line) 80%,transparent);font-size:14px;color:var(--muted)}
+.growth-notes>summary{font-size:15px;color:var(--muted);font-weight:700}
+.growth-notes[open]>summary{margin-bottom:6px}
+.growth-notes-body h3{font-size:14px;color:var(--muted);margin:16px 0 4px}
+.growth-notes-body p{margin:6px 0;font-size:14px;line-height:1.65}
+.growth-notes-body .role-list{font-size:13px;margin:6px 0 0}
+.growth-notes-body .role-link{margin-top:10px}
+@media(max-width:700px){.growth-notes{padding:16px 16px;margin-top:22px}}
+/* 每天的状态说明：点之前知道三个按钮各做什么，点完能在卡里看到当前状态 */
+.growth-day-state{margin:12px 0 0;padding:10px 14px;border-radius:12px;border-left:3px solid color-mix(in srgb,var(--brand) 42%,transparent);background:color-mix(in srgb,var(--brand) 7%,var(--paper-solid));color:var(--ink);font-size:14px;line-height:1.65}
+.growth-day[data-status="done"] .growth-day-state{border-left-color:var(--brand)}
+.growth-day[data-status="skipped"] .growth-day-state{border-left-color:var(--line);background:color-mix(in srgb,var(--ink) 4%,var(--paper-solid));color:var(--muted)}
+.growth-day[data-flash="true"]{animation:growthDayFlash 1.2s ease-out 1}
+@keyframes growthDayFlash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--brand) 42%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@media(prefers-reduced-motion:reduce){.growth-day[data-flash="true"]{animation:none}}
+
+/* ── 报告三块：基础分析 / 商业规划 / 行动计划 ──
+   三块是分组容器，不是新的一层卡片；用顶部细线 + 序号徽标把长页面切开。
+   ⚠️ 图标文案的底色取 --brand 12%，文字必须用 --ink：深色主题下 --brand-deep 是亮蓝，
+      压在浅蓝底上字底亮度差只有 20 出头（踩过）。 */
+.growth-part{position:relative;margin:30px 0 0}
+.growth-part[hidden]{display:none}
+.growth-part-head{position:relative;padding:18px 0 14px 15px;border-top:1px solid var(--line)}
+.growth-part-head::before{content:'';position:absolute;left:0;top:24px;bottom:16px;width:3px;border-radius:3px;pointer-events:none;background:linear-gradient(to bottom,color-mix(in srgb,var(--brand) 62%,transparent),color-mix(in srgb,var(--brand) 16%,transparent))}
+.growth-part:first-child>.growth-part-head{border-top:0;padding-top:2px}
+.growth-part:first-child>.growth-part-head::before{top:8px}
+.growth-part-head>.growth-part-kicker{margin:0 0 5px;font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--brand);line-height:1.2}
+.growth-part-head>h2{margin:0;font-size:22px;letter-spacing:-.02em}
+.growth-part-head>.growth-part-note{margin:6px 0 0;font-size:14px;color:var(--muted);line-height:1.6}
+.growth-part-body>.role-card:first-child,.growth-part-body>.growth-hero:first-child{margin-top:4px}
+@media(max-width:700px){.growth-part{margin-top:24px}.growth-part-head{padding:14px 0 12px 12px}.growth-part-head::before{top:20px;bottom:14px;width:3px}.growth-part-head>h2{font-size:19px}.growth-part-head>.growth-part-kicker{font-size:12px}.growth-part-head>.growth-part-note{font-size:13px;line-height:1.55}}
+
+/* ── 五项特点提到页面最上方 ──
+   以前它是类型卡内部的第 N 段，手机上要滑很久才看到；现在单独成卡放在最前面。
+   卡内那张 .role-card 自带边框，这里把它拆掉，避免卡片套卡片。 */
+.growth-traits-top{margin:0 0 20px}
+.growth-traits-top>.growth-traits-detail{margin:0;padding:18px 22px;border:1px solid var(--line);border-radius:22px;background:var(--paper)}
+.growth-traits-top>.growth-traits-detail>summary{margin-bottom:4px}
+.growth-traits-top .growth-traits-detail>.role-card{margin:10px 0 0;padding:0;border:0;background:transparent}
+@media(max-width:700px){.growth-traits-top{margin-bottom:16px}.growth-traits-top>.growth-traits-detail{padding:16px 18px;border-radius:18px}.growth-traits-top .role-trait-use{display:none}}
+
+/* ── 顶部横向导航（三大板块） ──
+   粘在视口顶部；点一下用 JS 接管滚动，落点固定留 88px 给顶栏。 */
+.growth-part-nav{position:sticky;top:0;z-index:9;display:flex;gap:8px;margin:18px 0 4px;padding:9px 10px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--paper-solid) 90%,transparent);backdrop-filter:blur(12px);overflow-x:auto;scrollbar-width:none}
+.growth-part-nav::-webkit-scrollbar{display:none}
+.growth-part-nav>a{flex:1 1 0;min-width:0;text-align:center;white-space:nowrap;padding:9px 10px;border-radius:11px;font-size:14px;font-weight:500;color:var(--brand-deep);text-decoration:none;border:1px solid color-mix(in srgb,var(--brand) 18%,var(--line));background:var(--paper-solid);transition:border-color .16s ease,background .16s ease}
+.growth-part-nav>a:hover{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid))}
+.growth-part-nav>a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.growth-part{scroll-margin-top:88px}
+/* 没有生成报告时，第三块给一张鼓励卡，而不是空着 */
+.growth-empty-plan{border-style:dashed;background:color-mix(in srgb,var(--brand) 5%,var(--paper-solid))}
+.growth-empty-plan>h3{margin-bottom:10px}
+@media(max-width:700px){/* 左上角菜单按钮是 fixed 的，导航要粘在它下面才不打架 */
+.growth-part-nav{top:max(64px,env(safe-area-inset-top));gap:6px;padding:7px 8px;margin:14px 0 2px;border-radius:14px}.growth-part-nav>a{font-size:12.5px;padding:8px 6px;border-radius:9px}.growth-part{scroll-margin-top:84px}}
+/* 04 怎样合作：按八种类型自己添加搭档（选项来自服务端 partnerOptions） */
+.growth-partner-body>.role-card{margin-bottom:16px}
+.growth-partner-add{margin:10px 0 0}
+.growth-partner-add>h3{margin:16px 0 8px}
+.growth-partner-add>button[hidden],.growth-partner-form[hidden]{display:none}
+.growth-partner-tag{display:block;margin:0 0 8px;color:var(--ink);opacity:.75}
+.growth-partner-note{margin:0 0 8px}
+.growth-partner-form{display:grid;gap:12px;margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--paper-solid) 90%,var(--brand))}
+.growth-partner-options{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.growth-partner-option{display:grid;gap:4px;min-height:0;padding:12px 14px;border-radius:14px;background:var(--paper);color:var(--ink);text-align:left}
+.growth-partner-option>strong{font-size:16px}
+.growth-partner-option>small{font-size:13px;line-height:1.5;color:var(--muted)}
+.growth-partner-option[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--paper))}
+.growth-partner-option:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+@media (max-width:760px){.growth-partner-options{grid-template-columns:1fr}}
+
+/* Chapters retain 01–06; letters clarify the longer sections within them. */
+.growth-section-letter{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;margin-right:6px;padding:0 5px;border:1px solid var(--line);border-radius:7px;background:color-mix(in srgb,var(--brand) 9%,var(--paper-solid));color:var(--ink);font-size:.8em;line-height:1;font-weight:700;vertical-align:middle}
+.growth-marked-heading{line-height:1.65!important}
+.growth-partner-recommended>h3,.growth-partner-workspace>h3{margin:0 0 18px}
+.growth-partner-recommended>.role-card{margin-bottom:14px}
+.growth-partner-workspace{margin-top:24px;padding:22px;border:1px solid color-mix(in srgb,var(--brand) 30%,var(--line));border-radius:18px;background:color-mix(in srgb,var(--brand) 5%,var(--paper-solid))}
+.growth-partner-workspace>.role-card{background:var(--paper-solid);margin-bottom:14px}
+.growth-partner-workspace>.growth-partner-add{margin-top:18px;padding-top:18px;border-top:1px dashed color-mix(in srgb,var(--brand) 35%,var(--line))}
+.growth-partner-add>h4{font-size:16px;margin:0 0 6px}.growth-partner-add>.role-small{margin:0 0 12px}
+.growth-personality-dimension{padding:16px 0;border-top:1px solid var(--line)}
+.growth-personality-dimension:first-of-type{margin-top:20px}.growth-personality-dimension>summary{color:var(--ink)}
+.growth-personality-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 4px}
+.growth-personality-points>section{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper-solid)}
+.growth-personality-points h4,.growth-personality-partners h4{font-size:15px;margin:0 0 8px;color:var(--brand-deep)}
+.growth-personality-points p,.growth-personality-partners article p{font-size:15px;margin:0;line-height:1.75}
+.growth-personality-partners{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.growth-personality-partners article{padding:16px 0}.growth-personality-partners article+article{border-top:1px dashed var(--line)}
+.growth-personality-partners article p+p{margin-top:8px}
+@media(max-width:700px){.growth-partner-workspace{padding:16px 12px}.growth-personality-points{grid-template-columns:1fr;gap:10px}.growth-personality-points>section{padding:14px}.growth-personality-dimension>summary{font-size:15px}.growth-section-letter{margin-right:4px}}
+
+/* 两行标题共用同一套盒子：同字号/字重/颜色/行高/左边界/高度，差别只剩折叠标题右侧的「展开 ▾」胶囊 */
+.growth-personality-partners .growth-partner-heading{font-family:inherit;font-size:18px;font-weight:700;line-height:1.65;color:var(--ink);margin:0 0 8px;padding:7px 0;min-height:44px;box-sizing:border-box}
+.growth-partner-agreement{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+/* 折叠标题别缩进：details>summary 为放箭头留了 20px 左内边距，会让它比上一行缩进一格 */
+.growth-partner-agreement>.growth-partner-heading{padding-left:0}
+/* 必须带 .role-growth 才压得过 .role-growth details[open]>summary::before（展开后箭头会再冒出来） */
+.role-growth .growth-partner-agreement>.growth-partner-heading::before{content:none}
+.growth-partner-agreements{list-style-type:lower-alpha;padding-left:26px;font-size:15px;line-height:1.75;color:var(--ink)}
+.growth-partner-agreements>li{padding-left:4px;margin:12px 0}.growth-partner-agreements>li::marker{font-weight:700;color:var(--brand-deep)}
+/* 生活探索第 4 步：和上面三个小节同一套标题，三条自查用 1/2/3 */
+.growth-exploration-check{margin-top:24px;padding-top:20px;border-top:1px dashed var(--line)}
+.growth-check-list{list-style-type:decimal;padding-left:26px;font-size:15px;line-height:1.75;color:var(--ink)}
+.growth-check-list>li{margin:10px 0;padding-left:4px}
+.growth-check-list>li::marker{font-weight:700;color:var(--brand-deep)}
+/* 经典五问：旧版报告里学员用得最多的五个模块 */
+.growth-classic h3{margin:22px 0 8px}
+.growth-classic h3:first-of-type{margin-top:18px}
+.growth-classic .role-list{font-size:15px;line-height:1.75}
+.growth-classic .role-card{margin-bottom:12px}
+.growth-classic .role-card:last-child{margin-bottom:0}
+/* 椅子卡等高：手机是单列，grid stretch 管不到跨行，用 1fr 让两行取同一高度 */
+.growth-classic .growth-chair-cards{grid-auto-rows:1fr}
+.growth-classic .growth-chair-cards>.role-card{display:flex;flex-direction:column;margin-bottom:0}
+/* 「风格参照」推到底：两张卡等高后，这行要贴同一条基线 */
+.growth-classic .growth-chair-cards>.role-card>small:last-child{margin-top:auto;padding-top:8px}

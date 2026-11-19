@@ -1,0 +1,46 @@
+.replica-loading { padding: 80px; font: 16px system-ui; color: #475569; background: #f8fafc; }
+.replica-badge { position: fixed; bottom: 10px; right: 16px; z-index: 900; border: 1px solid #dbe4f0; border-radius: 30px; background: #ffffffed; color: #475569; padding: 7px 12px; font: 11px system-ui; box-shadow: 0 3px 15px #0f172a0c; cursor: pointer; }
+.replica-dialog { border: 1px solid #e2e8f0; border-radius: 20px; padding: 28px; max-width: min(740px, 90vw); max-height: 85vh; color: #0f172a; background: white; box-shadow: 0 24px 90px #0f172a26; font: 15px/1.7 system-ui; }
+.replica-dialog::backdrop { background: #0f172a55; backdrop-filter: blur(3px); }
+.replica-dialog h2 { margin: 0 36px 18px 0; font-size: 22px; }
+.replica-dialog button, .replica-panel button { padding: 9px 16px; border: 1px solid #dbe4f0; border-radius: 9px; background: #f1f5f9; color: #1e40af; cursor: pointer; }
+.replica-dialog .replica-close { position: absolute; top: 14px; right: 14px; padding: 3px 10px; }
+.replica-dialog label { display: block; margin: 12px 0; }
+.replica-dialog input, .replica-dialog textarea, .replica-dialog select { display: block; width: 100%; box-sizing: border-box; margin: 6px 0 12px; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; }
+.replica-toast { position: fixed; left: 50%; bottom: 44px; transform: translateX(-50%); z-index: 10000; padding: 11px 20px; border-radius: 12px; background: #0f172a; color: white; font: 14px system-ui; box-shadow: 0 8px 30px #0f172a22; }
+.replica-panel { border: 1px solid #e2e8f0; padding: 22px; border-radius: 16px; background: #fff; margin: 18px 0; }
+.replica-list-item { display: block; width: 100%; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 12px; margin: 8px 0; background: white; color: #0f172a; text-align: left; cursor: pointer; }
+.replica-list-item small { display: block; margin-top: 5px; color: #64748b; }
+.replica-empty { color: #64748b; padding: 20px; }
+.replica-search-results { overflow: auto; max-height: 55vh; }
+.replica-search-results a { display: block; border-bottom: 1px solid #e2e8f0; padding: 12px 2px; color: #1d4ed8; text-decoration: none; }
+.replica-search-results small { display: block; color: #64748b; }
+.replica-customer { display: grid; grid-template-columns: 1fr 1.4fr .7fr 1.2fr 1fr; gap: 14px; align-items: center; padding: 16px; border-bottom: 1px solid #e2e8f0; }
+.replica-customer button { border: 0; background: #eff6ff; border-radius: 7px; color: #1d4ed8; padding: 6px 10px; cursor: pointer; }
+.replica-chat { height: calc(100vh - 140px); display: flex; flex-direction: column; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+.replica-chat-head { padding: 18px 22px; border-bottom: 1px solid #f1f5f9; font: 600 18px system-ui; }
+.replica-chat-messages { flex: 1; overflow: auto; padding: 20px; }
+.replica-chat-message { max-width: 900px; background: #f1f5f9; padding: 16px; border-radius: 12px; white-space: pre-wrap; font: 14px/1.8 system-ui; margin-bottom: 14px; }
+.replica-chat form { display: flex; gap: 12px; padding: 16px; }
+.replica-chat textarea { flex: 1; min-height: 44px; border: 1px solid #e2e8f0; border-radius: 20px; padding: 12px 18px; font: 14px system-ui; }
+.replica-chat small { text-align: center; padding: 0 12px 12px; color: #94a3b8; }
+.replica-fullscreen { position: fixed !important; inset: 20px !important; z-index: 8000 !important; width: auto !important; height: auto !important; max-height: none !important; overflow: auto !important; background: #fff; padding: 28px !important; box-shadow: 0 0 0 30px #0f172a66; border-radius: 14px; }
+.replica-fullscreen textarea { min-height: 65vh; }
+[hidden] { display: none !important; }
+.replica-sidebar-collapsed #member-sidebar, .replica-sidebar-collapsed .workspace-sidebar { display: none !important; }
+.replica-sidebar-collapsed .workspace-main, .replica-sidebar-collapsed main { margin-left: 0 !important; }
+.replica-sidebar-collapsed .sidebar-restore { display: flex !important; }
+@media (max-width: 700px) {
+  .replica-customer { grid-template-columns: 1fr 1fr; }
+  .replica-dialog { padding: 22px; }
+  .replica-badge { font-size: 10px; padding: 5px 8px; }
+}
+
+.replica-reference { max-width: 1050px; padding: 36px; margin: 24px auto; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; color: #0f172a; line-height: 1.85; }
+.replica-reference h1, .replica-reference h2, .replica-reference h3 { margin-top: 1.6em; line-height: 1.4; }
+.replica-reference img { display: block; max-width: 100%; height: auto; margin: 24px auto; }
+.replica-reference table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.replica-reference th, .replica-reference td { border: 1px solid #e2e8f0; padding: 12px 16px; text-align: left; vertical-align: top; white-space: pre-line; }
+.replica-reference th { background: #f1f5f9; }
+.replica-reference pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 20px; background: #f8fafc; border-radius: 10px; }
+@media (max-width: 700px) { .replica-reference { padding: 20px; overflow-x: auto; } }

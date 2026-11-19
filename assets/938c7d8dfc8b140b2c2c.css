@@ -1,0 +1,359 @@
+.workspace-main [data-starter-home][hidden],.workspace-main [data-advanced-workspace][hidden],.starter-content [hidden] { display: none !important; }
+.starter-content,.starter-status { width: 100%; max-width: 1520px; margin: 0 auto; }
+.cockpit-page .topbar { display: grid; grid-template-columns: minmax(0,1fr) auto auto; }
+.cockpit-page .topbar-left { grid-column: 1; grid-row: 1; }
+.cockpit-page .topbar-actions { grid-column: 3; grid-row: 1; }
+.starter-topbar-switch { grid-column: 2; grid-row: 1; justify-self: end; }
+.starter-switch { display: flex; padding: 4px; gap: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+.starter-switch button { min-height: 44px; padding: 8px 18px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font: inherit; font-size: var(--font-16); cursor: pointer; }
+.starter-switch button[aria-pressed=true] { background: var(--brand-deep); color: #fff; box-shadow: 0 4px 12px color-mix(in srgb,var(--brand) 20%,transparent); }
+.starter-switch button:focus-visible,.starter-card:focus-visible,.starter-check:focus-visible,.starter-collection-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.starter-switch button:disabled { cursor: wait; opacity: .65; }
+.desk-member .starter-entry { display: flex; align-items: center; gap: 8px; max-width: 100%; min-height: 44px; margin-top: 8px; padding: 10px 14px; border: 1px solid color-mix(in srgb,var(--brand) 30%,var(--line)); border-radius: 13px; background: linear-gradient(120deg,var(--paper-solid),color-mix(in srgb,var(--brand) 12%,var(--paper-solid))); box-shadow: 0 4px 14px color-mix(in srgb,var(--brand) 10%,transparent); color: var(--ink); font: inherit; font-size: var(--font-14); line-height: 1.5; text-align: left; cursor: pointer; }
+.starter-entry strong,.starter-entry > span:last-child { color: var(--brand-deep); }
+.desk-member .starter-entry:hover { border-color: var(--brand); }
+.desk-member .starter-entry:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.desk-member .starter-entry:disabled { cursor: wait; opacity: .65; }
+.starter-content { padding: 24px 32px 40px; }
+/* 初创空间与高级工作台同宽：沿用 workspace.css#.dashboard-content 的宽度公式与断点，左右边缘逐像素对齐。
+   顶部不再另加留白，首个标题与高级工作台第一块内容同高；底部留白同步为 70px / 42px。 */
+.starter-content[data-starter-home],.starter-status { width: min(1440px, calc(100% - clamp(36px, 7vw, 100px))); max-width: none; margin: 0 auto; }
+.starter-content[data-starter-home] { padding: 28px 0 70px; }
+@media(max-width:900px) { .starter-content[data-starter-home],.starter-status { width: calc(100% - 36px); } }
+@media(max-width:767px) { .starter-content[data-starter-home],.starter-status { width: calc(100% - 24px); } .starter-content[data-starter-home] { padding-bottom: 42px; } }
+.starter-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 16px; }
+.starter-eyebrow { color: var(--brand-deep); font-size: var(--font-14); margin: 0 0 8px; }
+.starter-heading h2 { font-size: var(--font-28); font-weight: 650; line-height: 1.4; margin: 0 0 6px; color: var(--ink); }
+.starter-heading > div > p:not(.starter-eyebrow) { font-size: var(--font-16); line-height: 1.7; color: var(--muted); margin: 0; }
+.starter-home-heading { gap: 24px; margin-bottom: 20px; }
+.starter-heading-intro { flex: 1; min-width: 0; }
+/* ⚠️ 这里原来写 `flex: 0 1 420px; max-width: 44%` —— flex 时代的宽度约束。
+   该行已是 grid（宽度由 grid-template-columns 分配），flex/max-width 在 grid 子项上
+   要么无效、要么二次收窄列内容易算错。宽度一律交给 grid，这里只保留 margin 归零。
+   ⭐ 真出现过的病根：下方第 127 行的 min-width:414px 撑破 352px 列宽 → 两卡重叠。 */
+.starter-home-heading > .starter-check { margin-bottom: 0; }
+.starter-check { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(110deg,var(--paper-solid),color-mix(in srgb,var(--brand) 8%,var(--paper-solid))); color: var(--ink); text-decoration: none; margin-bottom: 16px; }
+.starter-check-icon { display: flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 14px; background: var(--brand-deep); color: #fff; font-size: var(--font-24); line-height: 1; }
+.starter-check strong { font-size: var(--font-18); line-height: 1.5; }
+.starter-check p { margin: 4px 0 0; color: var(--muted); font-size: var(--font-14); line-height: 1.6; }
+.starter-check-copy { min-width: 0; flex: 1; display: block; }
+.starter-check-action { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; min-height: 24px; font-size: var(--font-14); color: var(--brand-deep); }
+/* 每行最多 4 张，窗口变窄按 min-width 自动减列（4 → 3 → 2 → 1）。
+   各行均从左侧开始排列，末行不足四张时也与首行左边缘对齐。
+   注：min-width 必须带 .starter-role-grid 前缀，否则会被下方 .starter-card{min-width:0} 覆盖。 */
+/* 八张助手卡沿用四列基准；窄窗减列时末行也从左侧开始。 */
+.starter-role-grid { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 16px; }
+.starter-role-grid > .starter-card { flex: 0 0 calc((100% - 48px) / 4); min-width: 232px; }
+.starter-video-start { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 22px; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper-solid); }
+.starter-video-start h3 { margin: 0 0 5px; font-size: var(--font-20); line-height: 1.5; }
+.starter-video-start p { margin: 0; color: var(--muted); font-size: var(--font-16); line-height: 1.7; }
+.starter-start-button { display: inline-flex; justify-content: center; align-items: center; gap: 18px; min-height: 44px; flex-shrink: 0; padding: 10px 18px; border-radius: 10px; color: #fff; background: var(--brand-deep); font-size: var(--font-16); font-weight: 700; text-decoration: none; }
+.starter-start-button:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+@media(max-width:700px) { .starter-video-start { flex-direction: column; align-items: stretch; padding: 16px; gap: 12px; } .starter-start-button { width: 100%; box-sizing: border-box; } }
+.starter-card { min-width: 0; display: flex; flex-direction: column; padding: 8px; border: 1px solid var(--line); border-radius: 18px; color: var(--ink); text-decoration: none; background: linear-gradient(155deg,var(--paper-solid),color-mix(in srgb,var(--brand) 9%,var(--paper-solid))); box-shadow: 0 2px 8px color-mix(in srgb,var(--brand) 6%,transparent); transition: transform .18s ease,border-color .18s ease,box-shadow .18s ease; }
+.starter-card:nth-child(2n) { background: linear-gradient(155deg,var(--paper-solid),color-mix(in srgb,var(--brand-2) 12%,var(--paper-solid))); }
+a.starter-card:hover { transform: translateY(-4px); border-color: var(--brand); box-shadow: 0 12px 30px color-mix(in srgb,var(--brand) 12%,transparent); }
+.starter-avatar { position: relative; overflow: hidden; aspect-ratio: 1; width: 100%; max-width: 220px; align-self: center; border-radius: 12px; background-image: url("/creator-workbench/assets/7cc394201a203d87ebdb.png"); background-size: 300% 200%; background-repeat: no-repeat; background-color: var(--paper-solid); }
+.starter-avatar.positioning { background-position: 0% 0%; }
+.starter-avatar.video { background-position: 50% 0%; }
+.starter-avatar.moments { background-position: 100% 0%; }
+.starter-avatar.social { background-position: 0% 100%; }
+.starter-avatar.sales { background-position: 50% 100%; }
+.starter-avatar.diagnosis { background-position: 100% 100%; }
+.starter-avatar.week { background-image: url("/creator-workbench/assets/71123ec6fd5c38c269e2.jpg"); background-size: cover; background-position: center; }
+.starter-avatar.growth { background-image: url("/creator-workbench/assets/0890f573e742798a5618.jpg"); background-size: cover; background-position: center; }
+.starter-avatar-placeholder { display: grid; place-items: center; background-image: none; color: var(--brand-deep); font-size: var(--font-32); font-weight: 600; }
+.starter-card-body { display: flex; flex-direction: column; flex: 1; padding: 12px 8px 4px; }
+.starter-role-number { font-size: var(--font-14); color: var(--brand-deep); font-weight: 600; letter-spacing: .12em; margin-bottom: 4px; }
+.starter-card h3 { margin: 0 0 6px; font-size: var(--font-18); line-height: 1.45; font-weight: 650; overflow-wrap: anywhere; }
+.starter-role-identity { position: absolute; inset: auto 0 0; display: block; padding: 20px 12px 8px; background: linear-gradient(transparent,rgba(15,23,42,.72)); color: #fff; font-size: var(--font-16); font-weight: 600; line-height: 1.5; text-align: center; overflow-wrap: anywhere; pointer-events: auto; }
+.starter-card p { margin: 0 0 12px; color: var(--muted); font-size: var(--font-16); line-height: 1.6; }
+.starter-card-action { margin-top: auto; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 6px; border-top: 1px solid var(--line); padding: 12px 0 0; font-size: var(--font-14); font-weight: 600; color: var(--brand-deep); }
+.starter-card[aria-disabled=true] { box-shadow: none; }
+.starter-card[aria-disabled=true] .starter-card-action { color: var(--muted); }
+.starter-resume { display: block; margin-bottom: 14px; font-size: var(--font-14); color: var(--brand-deep); line-height: 1.6; overflow-wrap: anywhere; }
+.starter-status { min-height: 24px; padding: 0; font-size: var(--font-14); color: var(--muted); line-height: 1.7; }
+.starter-status:empty { display: none; }
+.starter-muted { color: var(--muted); font-size: var(--font-14); line-height: 1.7; }
+.starter-retry,.starter-back { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; font-size: var(--font-16); padding: 10px 18px; border-radius: 12px; cursor: pointer; text-decoration: none; }
+.starter-collection-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
+.starter-collection-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-solid); color: var(--ink); text-decoration: none; box-shadow: 0 3px 12px color-mix(in srgb,var(--ink) 4%,transparent); transition: border-color .18s ease,box-shadow .18s ease; }
+a.starter-collection-card:hover { border-color: var(--brand); box-shadow: 0 10px 24px color-mix(in srgb,var(--brand) 12%,transparent); }
+.starter-collection-body { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 20px; }
+.starter-scene { position: relative; aspect-ratio: 4 / 3; margin: 8px 8px 0; overflow: hidden; border-radius: 14px; background: color-mix(in srgb,var(--brand) 8%,var(--paper-solid)); }
+.starter-scene-art { position: absolute; width: 100%; aspect-ratio: 1; top: 50%; transform: translateY(-50%); background-repeat: no-repeat; }
+.starter-scene-moments .starter-scene-art { background-image: url("/creator-workbench/assets/9849679031b4213b57af.png"); background-size: 200% 200%; }
+.starter-scene-diagnosis .starter-scene-art { background-image: url("/creator-workbench/assets/73cbbf1ef5925b730042.png"); background-size: 300% 200%; }
+.starter-scene-moments .starter-scene-0,.starter-scene-diagnosis .starter-scene-0 { background-position: 0% 0%; }
+.starter-scene-moments .starter-scene-1 { background-position: 100% 0%; }
+.starter-scene-moments .starter-scene-2 { background-position: 0% 100%; }
+.starter-scene-moments .starter-scene-3 { background-position: 100% 100%; }
+.starter-scene-diagnosis .starter-scene-1 { background-position: 50% 0%; }
+.starter-scene-diagnosis .starter-scene-2 { background-position: 100% 0%; }
+.starter-scene-diagnosis .starter-scene-3 { background-position: 0% 100%; }
+.starter-scene-diagnosis .starter-scene-4 { background-position: 50% 100%; }
+.starter-scene .starter-letter { position: absolute; left: 12px; bottom: 12px; width: 36px; height: 36px; margin: 0; border-radius: 11px; background: var(--paper-solid); font-size: var(--font-18); box-shadow: 0 2px 8px #0001; }
+.starter-scene-label { color: var(--brand-deep); font-size: var(--font-14); line-height: 1.5; margin-bottom: 6px; }
+.starter-collection-card[aria-disabled=true] .starter-scene { opacity: .65; }
+.starter-collection-card[aria-disabled=true] .starter-card-action { color: var(--muted); }
+.starter-letter { width: 44px; height: 44px; display: grid; place-items: center; margin-bottom: 20px; border-radius: 14px; background: color-mix(in srgb,var(--brand) 10%,var(--paper-solid)); color: var(--brand-deep); font-size: var(--font-20); font-weight: 600; }
+.starter-collection-card h2 { margin: 0 0 8px; font-size: var(--font-20); line-height: 1.5; overflow-wrap: anywhere; }
+.starter-collection-card p { font-size: var(--font-16); line-height: 1.7; color: var(--muted); margin: 0 0 20px; }
+.starter-collection-note { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 20px; color: var(--muted); font-size: var(--font-14); line-height: 1.7; }
+@media(max-width:1199px) { .starter-collection-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:1000px) { .starter-home-heading { gap: 16px; } .starter-home-heading > .starter-check { flex-basis: 100%; max-width: none; width: 100%; } }
+@media(max-width:1200px) { .cockpit-page .topbar { grid-template-columns: minmax(0,1fr) auto; } .cockpit-page .topbar-actions { grid-column: 2; } .starter-topbar-switch { grid-column: 1 / -1; grid-row: 2; } }
+@media(max-width:767px) { .starter-topbar-switch { grid-row: 3; width: 100%; } .starter-topbar-switch button { flex: 1; } }
+@media(max-width:700px) { .starter-switch { width: 100%; } .starter-switch button { flex: 1; padding: 8px 12px; } .starter-content { padding: 24px 16px 40px; } .starter-heading h2 { font-size: var(--font-24); } .starter-role-grid > .starter-card { flex-basis: 100%; } .starter-collection-grid { grid-template-columns: 1fr; gap: 16px; } .starter-card { display: grid; grid-template-columns: minmax(0,38%) minmax(0,1fr); align-items: center; } .starter-avatar { position: relative; overflow: hidden; aspect-ratio: 1; } .starter-card-body { padding: 14px 12px; } .starter-card h3 { font-size: var(--font-20); } .starter-collection-card { padding: 24px; } }
+@media(prefers-reduced-motion:reduce) { .starter-card,.starter-collection-card { transition: none; } a.starter-card:hover { transform: none; } }
+@media(max-width:700px) { [data-starter-collection=moments] .starter-collection-grid { grid-template-columns: 1fr; } .starter-collection-card { padding: 0; display: grid; grid-template-columns: minmax(0,35%) minmax(0,1fr); align-items: stretch; } .starter-scene { aspect-ratio: auto; margin: 8px 0 8px 8px; min-height: 156px; } .starter-scene-art { width: 190%; left: -45%; } .starter-collection-body { padding: 16px; } .starter-collection-card h2 { font-size: var(--font-18); } .starter-collection-card p { margin-bottom: 12px; } .starter-scene .starter-letter { left: 8px; bottom: 8px; width: 32px; height: 32px; font-size: var(--font-16); } }
+@media(max-width:700px) {
+  /* 窄屏两张卡**必须一起**换成「大图标 + 文案」双列布局 —— 只改 .starter-check 会让入口卡
+     保持左图标横排，两卡一高一低、完全不像一套（用户要求两卡样式一致）。
+     ⚠️ 选择器必须带 `.starter-home-heading >` 前缀提特异性：
+     本文件后面（约 240 行）还有一条 `.starter-check, .workspace-newcomer { display:flex … }`
+     的基础段共用规则，无前缀时同特异性、**靠后者胜** → 窄屏的 grid 会被基础段的 flex 顶掉，
+     表现就是两卡一个 grid 一个 flex（实测 QA 抓到的 display 'block' !== 'flex'）。 */
+  .starter-home-heading > .starter-check,
+  .starter-home-heading > .workspace-newcomer { display: grid; grid-template-columns: minmax(0,1fr); align-items: center; gap: 0; padding: 10px; border-radius: 24px; }
+  .starter-home-heading > .starter-check .starter-check-icon,
+  .starter-home-heading > .workspace-newcomer .workspace-newcomer-icon { width: min(100%,84px); height: auto; aspect-ratio: 1; margin: 0 auto; border-radius: 17px; font-size: var(--font-32); align-items: center; justify-content: center; }
+  .starter-check-copy,
+  .workspace-newcomer-copy { display: block; min-width: 0; padding: 14px 12px; }
+  .starter-check strong,
+  .workspace-newcomer-copy strong { display: block; font-size: var(--font-20); line-height: 1.45; }
+  .starter-check p,
+  .workspace-newcomer-copy p { font-size: var(--font-16); line-height: 1.7; margin: 10px 0 18px; white-space: normal; }
+  .starter-check-action,
+  .workspace-newcomer-action { margin: 0; min-height: 44px; border-top: 1px solid var(--line); padding-top: 12px; font-weight: 600; }
+}
+
+/* 两种工作台解决不同阶段的问题；共享原有主题、导航和数据。 */
+html[data-workspace-mode=beginner] .cockpit-page .topbar-left > div > span { display: none; }
+.starter-growth-path { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; margin: 14px 0 0; padding: 0; list-style: none; }
+.starter-growth-path li { position: relative; font-size: var(--font-14); color: var(--muted); background: var(--paper); border: 1px solid var(--line); padding: 2px 10px; border-radius: 20px; }
+.starter-growth-path li:not(:last-child)::after { content: '→'; position: absolute; right: -20px; color: var(--muted); }
+.starter-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 20px 0 14px; }
+.starter-section-heading h2,.starter-next-stage h2 { font-size: var(--font-20); line-height: 1.5; margin: 0; }
+.starter-section-heading p { margin: 0; color: var(--muted); font-size: var(--font-14); }
+button.starter-card { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+.starter-card .starter-outcome { font-size: var(--font-14); color: var(--ink); margin: 0 0 12px; }
+.starter-card .starter-task-heading { display: flex; align-items: center; gap: 8px; }
+.starter-task-heading .starter-role-number { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 30px; height: 28px; padding: 0 5px; margin: 0; border: 1px solid color-mix(in srgb,var(--brand) 24%,var(--line)); border-radius: 9px 9px 9px 3px; background: linear-gradient(145deg,color-mix(in srgb,var(--brand) 12%,var(--paper-solid)),color-mix(in srgb,var(--brand-2) 10%,var(--paper-solid))); font-variant-numeric: tabular-nums; line-height: 1; letter-spacing: .03em; }
+.starter-task-name { min-width: 0; }
+[data-starter-home] .starter-card-action { justify-content: flex-end; gap: .3em; text-align: right; }
+[data-starter-home] .starter-card-arrow { flex: none; }
+.starter-home-heading .starter-heading-intro { flex-basis: 0; }
+/* ⚠️⚠️ 这里原来有 `flex-basis:450px; min-width:414px; max-width:48%` —— 那是 flex 时代的约束。
+   改 grid 之后 min-width 会**撑破列宽**：实测列宽 352px、卡片却 414px，
+   右边溢出 62px 正好压在旁边的「第一次来？」卡上（用户反馈「两个卡片重叠了」）。
+   → grid 里宽度一律交给 grid-template-columns 分配，只保留 min-width:0 让内容可收缩。 */
+.starter-home-heading > .starter-check { min-width: 0; max-width: none; }
+/* ⚠️ 以下三处必须两卡并列：只写 .starter-check 会让入口卡在这个作用域里仍走基础段样式
+   → 以后改其中一处时两卡必然走样（用户反馈「两个卡片样式不一致」的根因之一）。 */
+.starter-home-heading .starter-check strong,
+.starter-home-heading .workspace-newcomer-copy strong { font-size: var(--font-18); }
+.starter-home-heading .starter-check p,
+.starter-home-heading .workspace-newcomer-copy p { font-size: var(--font-14); }
+.starter-home-heading .starter-check-action,
+.starter-home-heading .workspace-newcomer-action { font-size: var(--font-14); }
+.starter-next-stage { display: flex; align-items: center; gap: 24px; padding: 20px 22px; margin-top: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.starter-next-stage > div { min-width: 0; flex: 1; }
+.starter-next-stage p { color: var(--muted); font-size: var(--font-16); line-height: 1.6; margin: 6px 0 0; }
+.starter-progress { margin-top: 28px; padding: 22px; border: 1px solid color-mix(in srgb,var(--brand) 18%,var(--line)); border-radius: 20px; background: linear-gradient(125deg,color-mix(in srgb,var(--brand) 8%,var(--paper-solid)),var(--paper-solid) 48%,color-mix(in srgb,var(--brand-2) 12%,var(--paper-solid))); box-shadow: 0 5px 20px color-mix(in srgb,var(--brand) 5%,transparent); }
+.starter-progress .starter-section-heading { margin-top: 0; }
+.starter-progress-counts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
+.starter-progress-counts > div { padding: 12px 14px; background: color-mix(in srgb,var(--paper-solid) 78%,transparent); border: 1px solid color-mix(in srgb,var(--brand) 12%,var(--line)); border-radius: 14px; }
+.starter-progress-counts dt { color: var(--muted); font-size: var(--font-14); }
+.starter-progress-counts dd { margin: 0; font-size: var(--font-14); }
+.starter-progress-counts strong { font-size: var(--font-24); color: var(--ink); }
+.starter-progress-row { display: grid; grid-template-columns: 70px minmax(0,1fr) auto 16px; gap: 12px; align-items: center; min-height: 56px; padding: 12px 0; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.starter-progress-row strong { overflow-wrap: anywhere; font-size: var(--font-16); line-height: 1.5; }
+.starter-progress-row:hover { color: var(--brand-deep); background: color-mix(in srgb,var(--brand) 5%,transparent); }
+.starter-progress-row:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 8px; }
+.starter-progress-format { color: var(--brand-deep); font-size: var(--font-14); }
+.starter-progress .starter-back { font-size: var(--font-14); }
+.starter-notice { width: min(520px,calc(100% - 32px)); border: 1px solid var(--line); border-radius: 20px; background: var(--paper-solid); color: var(--ink); padding: 24px; box-shadow: var(--shadow); }
+.starter-notice::backdrop { background: #0f172a66; }
+.starter-notice h2 { font-size: var(--font-24); margin: 0; }
+.starter-notice p { font-size: var(--font-16); line-height: 1.6; }
+.starter-notice button { display: block; margin-left: auto; }
+@media(max-width:1000px) { .starter-home-heading .starter-heading-intro { flex-basis: 100%; } .starter-home-heading > .starter-check { flex-basis: 100%; min-width: 0; max-width: 100%; } }
+@media(max-width:700px) {
+  .starter-growth-path { max-width: 100%; gap: 8px 20px; }
+  .starter-growth-path li { padding: 2px 6px; }
+  .starter-growth-path li:not(:last-child)::after { right: -18px; }
+  .starter-section-heading { display: block; }
+  .starter-section-heading p { margin-top: 4px; }
+  /* 最窄断点：两张卡都退化为「无框纯文字块」。
+     ⚠️ 必须两卡并列 —— 只写 .starter-check 会让入口卡还留着边框和图标，
+        两卡一有壳一无壳、明显不是一套（用户要求两卡样式一致）。 */
+  .starter-home-heading > .starter-check,
+  .starter-home-heading > .workspace-newcomer { display: block; padding: 0; background: transparent; border: 0; }
+  .starter-home-heading .starter-check-icon,
+  .starter-home-heading .workspace-newcomer-icon { display: none; }
+  .starter-home-heading .starter-check-copy,
+  .starter-home-heading .workspace-newcomer-copy { padding: 0; }
+  .starter-home-heading .starter-check strong,
+  .starter-home-heading .workspace-newcomer-copy strong { font-size: var(--font-16); }
+  .starter-home-heading .starter-check-action,
+  .starter-home-heading .workspace-newcomer-action { border-top: 0; min-height: 44px; padding: 0; margin: 0; }
+  .starter-role-identity { font-size: var(--font-14); padding: 16px 5px 7px; }
+  .starter-name-position { display: block; }
+  .starter-name-separator { display: none; }
+  .starter-card-body { padding: 10px; }
+  .starter-card h3 { font-size: var(--font-18); }
+  .starter-card p { margin-bottom: 8px; }
+  .starter-next-stage { display: block; padding: 16px; }
+  .starter-next-stage .starter-start-button { width: 100%; margin-top: 14px; }
+  .starter-progress { padding: 16px; }
+  .starter-progress-counts { gap: 8px; }
+  .starter-progress-counts > div { padding: 10px 8px; }
+  .starter-progress-row { grid-template-columns: 56px minmax(0,1fr) 16px; gap: 8px; }
+  .starter-progress-row .starter-muted { grid-column: 2; grid-row: 2; }
+  .starter-progress-row > span:last-child { grid-column: 3; grid-row: 1 / 3; }
+}
+
+/* Moments helpers follow the starter workspace's personal, outcome-led cards. */
+[data-starter-collection=moments] .starter-collection-card { background:linear-gradient(155deg,var(--paper-solid),color-mix(in srgb,var(--brand) 5%,var(--paper-solid))); }
+[data-starter-collection=moments] .starter-collection-card:nth-child(even) { background:linear-gradient(155deg,var(--paper-solid),color-mix(in srgb,var(--brand-2) 7%,var(--paper-solid))); }
+[data-starter-collection=moments] .starter-scene { aspect-ratio:1; margin:10px 10px 0; border-radius:14px; }
+[data-starter-collection=moments] .starter-scene .starter-letter { top:10px; bottom:auto; left:10px; width:30px; height:30px; border-radius:9px 9px 9px 3px; font-size:var(--font-14); }
+[data-starter-collection=moments] .starter-role-identity { padding:24px 8px 10px; }
+[data-starter-collection=moments] .starter-collection-body { padding:18px 16px 20px; }
+[data-starter-collection=moments] .starter-collection-card .starter-outcome { margin:0 0 18px; color:var(--ink); font-size:var(--font-14); line-height:1.65; }
+[data-starter-collection=moments] .starter-card-action { justify-content:flex-end; gap:.3em; text-align:right; }
+[data-starter-collection=moments] .starter-card-arrow { flex:none; }
+.starter-identity-accessible { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(max-width:700px) {
+  [data-starter-collection=moments] .starter-collection-card { grid-template-columns:minmax(0,38%) minmax(0,1fr); align-items:center; }
+  [data-starter-collection=moments] .starter-scene { min-height:0; margin:10px 0 10px 10px; }
+  [data-starter-collection=moments] .starter-scene-art { width:100%; left:0; }
+  [data-starter-collection=moments] .starter-role-identity { font-size:var(--font-14); padding:18px 6px 8px; }
+  [data-starter-collection=moments] .starter-collection-body { padding:18px 12px; }
+  [data-starter-collection=moments] .starter-collection-card .starter-outcome { margin-bottom:12px; }
+}
+
+/* 新人入门入口（2026-10-14 用户口径：只放初创空间，与「今天，想分享点什么？」同一行，
+   跟「把自己当公司经营」（.starter-check）并排，按整行宽度自适应）。
+   ⚠️ 坑1：.starter-heading 是 flex-wrap:wrap，三块各自带 basis 会算不下而把入口挤到第二行
+   （实测行宽 1073 时入口 top 比标题低 101px）→ 所以改 grid（grid 不换行）。
+   ⚠️ 坑2：三列**等宽**（1fr/1fr/1fr）也不行 —— 实测入口卡只拿到 311px，
+   扣掉徽标/按钮/padding 后文案只剩 122px，副标题「7天入门，熟悉系统和工具。」被挤成两行。
+   → 改成「标题窄、两卡宽」(1fr / 1.1fr / 1.1fr)，让两张内容卡拿到足够横向空间。
+/* ⚠️ gap 24px：用户要「两卡中间留空隙、有呼吸感」，16px 太紧。
+   ⚠️ align-items:stretch：让两张卡**真正等高**（grid 默认行为）；
+   写 center 会让每张卡各按内容高度 → 看起来高矮不齐（用户反馈过）。
+   ⭐⭐ 列宽按用户口径（2026-10-14 第七轮，最终定稿）：**标题区 5/10、优势测评卡 3/10、入口卡 2/10**。
+   历史比例：1fr/1.1fr/1.1fr（标题 ~3.2/10）→ 3fr/1fr/1fr（6/10+2/10+2/10）
+   → 4fr/3fr/3fr（4/10+3/10+3/10，两卡等宽）→ 现在的 5fr/3fr/2fr（两卡不等宽，入口更窄）。
+   用 fr 而不是裸百分比：5/10+3/10+2/10 = 1fr，再加 2×24px gap 由 grid 自己从可用宽度里扣，
+   写成裸百分比会超 100%导致溢出。
+   2026-10-24：两卡去掉左侧图标，各在2.625/10及2/10的基础上缩小1/6，换算为59:21:16。 */
+.starter-home-heading { display: grid; grid-template-columns: minmax(0, 59fr) minmax(0, 21fr) minmax(0, 16fr); align-items: stretch; gap: 24px; }
+.starter-home-heading > .starter-heading-intro { min-width: 0; }
+.starter-home-heading > .starter-check,
+.starter-home-heading > .workspace-newcomer { flex: none; max-width: none; width: auto; margin-bottom: 0; }
+
+/* ============================================================
+   ⭐⭐ 两张卡同构（2026-10-14 第五轮用户要求「样式基本保持一致，看起来比较美观」）。
+   做法：**共用同一组声明**，而不是各写一份再靠对齐。
+   以后改圆角/内边距/渐变/字号只需改这一处，两卡不可能走样。
+   结构也一一对应：
+     .starter-check     = icon块 + copy(strong/p/action)
+     .workspace-newcomer = icon块 + copy(strong/p/action)   ← 完全同构
+   ============================================================ */
+/* 卡壳：两卡共用。padding / 圆角 / 描边 / 渐变 / 排布全部只写一次。 */
+.starter-check,
+.workspace-newcomer { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(110deg, var(--paper-solid), color-mix(in srgb, var(--brand) 8%, var(--paper-solid))); color: var(--ink); text-decoration: none; }
+/* 图标块：两卡共用 48×48 圆角色块，视觉重量对齐。
+   ⚠️ 徽标内容必须**上下居中**：用 align-items:center（不是 baseline）。
+   baseline 会让「7」按基线对齐、「天」悬在上方，整块视觉偏上、字距发虚。 */
+.starter-check-icon,
+.workspace-newcomer-icon { display: flex; align-items: center; justify-content: center; gap: 1px; flex: none; width: 48px; height: 48px; border-radius: 14px; background: var(--brand-deep); color: #fff; font-size: var(--font-24); line-height: 1; }
+/* 「7天」徽标：「7」大、「天」小，横排并垂直居中。 */
+.workspace-newcomer-icon span { font-size: var(--font-13); }
+/* 文案区：两卡共用。min-width:0 是关键 —— 不给它，flex 子项会按内容最小宽度撑开，把动作行挤出卡片。 */
+.starter-check-copy,
+.workspace-newcomer-copy { flex: 1; min-width: 0; display: block; }
+/* 标题：两卡同字号同行高 */
+.starter-check strong,
+.workspace-newcomer-copy strong { font-size: var(--font-18); line-height: 1.5; }
+/* ⚠️ 同上：基础段必须低于 700px 窄屏段的特异性，否则窄屏的大字号会被这条顶掉。
+   用 :where() 保持 0 特异性是错的（那样窄屏也压不住），这里靠「窄屏段写更长的
+   .starter-home-heading > 前缀」来分层，两边选择器对等、位置决定胜负。 */
+/* 副标题：两卡同字号同颜色。⭐ 不换行：宽度真不够时用省略号，而不是折成两行把卡片撑高（用户报过这个）。 */
+.starter-check p,
+.workspace-newcomer-copy p { margin: 4px 0 0; color: var(--muted); font-size: var(--font-14); line-height: 1.6; overflow-wrap: normal; word-break: keep-all; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* 底部动作行：两卡完全一致（左文案 + 右箭头 + 顶部细分隔线） */
+.starter-check-action,
+.workspace-newcomer-action { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; min-height: 24px; font-size: var(--font-14); color: var(--brand-deep); }
+/* 整卡就是 <a>（与 .starter-check 完全一致），所以不需要覆盖层来扩大点击区。 */
+.workspace-newcomer:hover { box-shadow: 0 6px 18px color-mix(in srgb, var(--brand) 12%, transparent); }
+.starter-check:focus-visible,
+.workspace-newcomer:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+@media (max-width: 1180px) {
+  /* 空间仍不够 → 隐副标题，标题与动作行保留（两卡同步隐，避免一高一低） */
+  .starter-home-heading > .starter-check p,
+  .starter-home-heading > .workspace-newcomer-copy p { display: none; }
+}
+@media (max-width: 1000px) {
+  /* 放不下三列 → 两列（标题整行，两张卡并排，此时横向更宽，副标题可恢复） */
+  .starter-home-heading { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .starter-home-heading > .starter-heading-intro { grid-column: 1 / -1; }
+  .starter-home-heading > .starter-check p,
+  .starter-home-heading > .workspace-newcomer-copy p { display: block; }
+}
+@media (max-width: 700px) {
+  /* 窄屏 → 单列纵向堆叠 */
+  .starter-home-heading { grid-template-columns: minmax(0, 1fr); }
+  .starter-home-heading > .starter-check p,
+  .starter-home-heading > .workspace-newcomer-copy p { display: block; }
+}
+
+/* Anchor targets must clear the actual sticky route bar, including headings inside cards. */
+.cockpit-page [data-advanced-workspace] [id],.cockpit-page [data-starter-home] [id] { scroll-margin-top: var(--workspace-anchor-offset, 100px); }
+
+/* Reuse the same avatar node and its interactions in either workspace. */
+.starter-promotion-slot { display: none; min-width: 0; align-items: center; justify-content: center; position: relative; z-index: 3; }
+.starter-promotion-slot:has(.desk-avatar:not([hidden])) { display: flex; }
+.starter-promotion-slot .desk-avatar { position: relative; right: auto; top: auto; transform: none; }
+.starter-promotion-slot .desk-avatar-frame img { width: 88px; height: 116px; }
+.starter-promotion-slot .desk-avatar-say em,
+.starter-promotion-slot .desk-avatar-cheer-text { color: #fff; -webkit-text-fill-color: #fff; opacity: 1; }
+.starter-promotion-slot .desk-avatar.is-cheering .desk-avatar-say { opacity: 0; }
+.starter-home-heading:has(> .starter-promotion-slot .desk-avatar:not([hidden])) {
+  grid-template-columns: minmax(0,1fr) 88px minmax(0,calc((100% - 48px) * .21875)) minmax(0,calc((100% - 48px) / 6));
+}
+@media (max-width: 1000px) {
+  .starter-home-heading:has(> .starter-promotion-slot .desk-avatar:not([hidden])) { grid-template-columns: 72px minmax(0,1fr) minmax(0,1fr); }
+  .starter-promotion-slot .desk-avatar-frame img { width: 72px; height: 96px; }
+}
+@media (max-width: 700px) {
+  .starter-home-heading:has(> .starter-promotion-slot .desk-avatar:not([hidden])) { grid-template-columns: minmax(0,44fr) minmax(0,56fr); }
+  .starter-promotion-slot { grid-column: 1; grid-row: 2 / span 2; align-self: stretch; }
+  .starter-home-heading:has(> .starter-promotion-slot .desk-avatar:not([hidden])) > .starter-check { grid-column: 2; grid-row: 2; }
+  .starter-home-heading:has(> .starter-promotion-slot .desk-avatar:not([hidden])) > .workspace-newcomer { grid-column: 2; }
+  .starter-promotion-slot .desk-avatar { width: 100%; height: 100%; min-height: 0; }
+  .starter-promotion-slot .desk-avatar-frame { position: absolute; inset: 0; display: block; }
+  .starter-promotion-slot .desk-avatar-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* Starter avatar bubbles sit above-left, outside the photo bounds. */
+.starter-promotion-slot .desk-avatar-say,
+.starter-promotion-slot .desk-avatar-cheer {
+  left: auto; right: calc(100% + .75rem - 20px); top: auto; bottom: calc(100% + .5rem);
+  max-width: min(20rem, calc(100vw - 2.5rem)); transform-origin: 100% 100%;
+}
+.starter-promotion-slot .desk-avatar-say::after,
+.starter-promotion-slot .desk-avatar-cheer::after { right: .75rem; }
+@media (max-width: 1000px) {
+  .starter-promotion-slot .desk-avatar-say,
+  .starter-promotion-slot .desk-avatar-cheer { left: 20px; right: auto; bottom: calc(100% + .75rem); }
+}
+
+/* On phones the avatar is on the left, so the bubble pointer belongs there too. */
+@media (max-width: 700px) {
+  .starter-promotion-slot .desk-avatar-say::after,
+  .starter-promotion-slot .desk-avatar-cheer::after { left: 2rem; right: auto; display: block; }
+}

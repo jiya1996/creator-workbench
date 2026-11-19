@@ -1,0 +1,212 @@
+/* 会员权益使用进度（P0）
+ * 会员年费的价值感来自「被使用」，不是被列出——把「我有什么」改成「我用得怎么样」。
+ * CSP：会员页 style-src 'self' 不放行内联样式，进度用分段格子 + class，不用动态 width。
+ *
+ * ⚠️ 底色铁律（2026-09-20 实测）：本页所有表面（卡片 / 面板 / chip）一律以不透明
+ *    `--paper-solid` 为基色。原来写死的 `color-mix(..., white)` / 半透明 `var(--paper)`
+ *    在暗色主题下会得到「近白底 + 浅色字」（实测 1.1~3.5:1），页面却照常打开不报错。
+ */
+
+/* 本页语义 token：面板内的强调色与辅助文字。
+ * --brand-deep / --muted 直接用在暗色主题下不够（planet/dark 的 --brand-deep 是中间蓝，
+ * 压在深色面板上只有 3.2~3.7:1），这里分别朝 --ink 混合收口。
+ *
+ * --bn-accent 的品牌占比是**实测扫出来的**，不是拍的：62% 时 gold 3.44:1 / wechat 3.94:1
+ * 不达标（这两套主题的 --brand 是亮琥珀 / 亮绿，压在暖白面板上拉不开）。
+ * 逐档扫描 12 套主题后取 40% —— gold 4.83 / wechat 5.70，其余 ≥5.5，且仍明显带品牌色
+ * （gold → 深琥珀 #99620a，wechat → 深绿 #0a7040），不是退化成 --ink。
+ * 更低（32%）收益递减还丢色相，故不取。 */
+:root {
+  --bn-accent: color-mix(in srgb, var(--brand) 40%, var(--ink));
+  --bn-muted: color-mix(in srgb, var(--muted) 76%, var(--ink));
+}
+
+.benefit-usage {
+  margin: 0 0 1.25rem;
+  padding: 1.125rem 1.25rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--brand) 20%, var(--line));
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--brand) 4%, var(--paper-solid, #f7fbff));
+}
+
+.benefit-usage:empty { display: none; }
+
+.benefit-usage-head { margin-bottom: .875rem; }
+
+.benefit-usage-head h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--font-20);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.benefit-usage-head p {
+  margin: .25rem 0 0;
+  color: var(--bn-muted);
+  font-size: var(--font-14);
+  line-height: 1.6;
+}
+
+.benefit-usage-meter {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.benefit-usage-bar {
+  display: flex;
+  flex: 1 1 auto;
+  gap: .25rem;
+}
+
+.benefit-usage-bar i {
+  flex: 1 1 0;
+  height: .5rem;
+  border-radius: .25rem;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.benefit-usage-bar i.is-used {
+  background: var(--brand);
+}
+
+.benefit-usage-count {
+  flex: none;
+  color: var(--ink);
+  font-size: var(--font-14);
+  font-weight: 800;
+}
+
+.benefit-usage-group { margin-top: .875rem; }
+
+.benefit-usage-label {
+  display: block;
+  margin-bottom: .5rem;
+  color: var(--bn-accent);
+  font-size: var(--font-12);
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.is-pending .benefit-usage-label { color: var(--bn-muted); }
+
+.benefit-usage-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+/* ⚠️ 这里的底色原来写的是 `color-mix(in srgb, white 78%, transparent)`：
+ * white 是主题无关的常量，暗色主题下得到「近白 chip + 浅色文字」（实测约 1.2:1），
+ * 跟 .benefit-card 是同一类坑。改成以 --paper-solid 为基色，12 套主题都稳。 */
+.benefit-usage-chip {
+  display: grid;
+  gap: .125rem;
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--brand) 6%, var(--paper-solid, #f7fbff));
+  color: inherit;
+  text-decoration: none;
+}
+
+.benefit-usage-chip:hover,
+.benefit-usage-chip:focus-visible {
+  border-color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 12%, var(--paper-solid, #f7fbff));
+  outline: none;
+}
+
+.benefit-usage-chip strong {
+  color: var(--ink);
+  font-size: var(--font-14);
+  font-weight: 700;
+}
+
+.benefit-usage-chip small {
+  color: var(--bn-muted);
+  font-size: var(--font-12);
+}
+
+.benefit-usage-chip.is-used {
+  border-color: color-mix(in srgb, var(--brand) 34%, var(--line));
+  background: color-mix(in srgb, var(--brand) 8%, var(--paper-solid, #f7fbff));
+}
+
+.benefit-usage-chip.is-used strong { color: var(--bn-accent); }
+
+/* =====================================================================
+ * 权益卡片本体（2026-09-20）
+ *
+ * ⚠️ 为什么要在这里覆盖 content.css 的 .benefit-card：
+ *   content.css 给卡片写死了 `background: rgba(255,255,255,.62)`（主题无关的白），
+ *   而标题颜色是继承来的 `--ink`。暗色主题（theme-planet / theme-dark）里 --ink 是浅色，
+ *   卡片却仍是近白 —— headless Edge 实测标题对比度只有 **1.09~1.11:1**，等于看不见。
+ *   （同页的 .benefit-usage 面板用的是主题令牌，所以它在暗色下是深底浅字、一直正常，
+ *     两张卡片并排就像两套设计。这属于「表面底色不得用主题无关的白」那条老坑。）
+ *   这里改回主题令牌：卡片底 --paper-solid、标题 --ink、正文 --muted，12 套主题一致可读。
+ *   benefits-usage.css 只在 benefits.html 引入，所以改动不会外溢到 library 等内容页。
+ * ===================================================================== */
+.benefit-card {
+  border-color: color-mix(in srgb, var(--brand) 16%, var(--line));
+  background: var(--paper-solid, rgba(255,255,255,.62));
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--brand) 8%, transparent);
+}
+
+.benefit-card h3 { color: var(--ink); }
+
+/* 正文：--muted 在 gold/orange/wechat 三套主题里对浅卡片只有 4.0~4.4:1（差一点点），
+ * 用本页 --bn-muted（朝 --ink 混合 24%）即可全主题 ≥4.5，且不硬编码色值。 */
+.benefit-card p { color: var(--bn-muted); }
+
+/* 图标底：原为硬编码 #e0edff 浅蓝，暗色主题下 --brand 本身是浅色，图标也会糊在底上 */
+.benefit-icon {
+  background: color-mix(in srgb, var(--brand) 16%, var(--paper-solid, #f7fbff));
+  color: var(--bn-accent);
+}
+
+.benefit-icon.has-image {
+  background: color-mix(in srgb, var(--brand-gold) 22%, var(--paper-solid, #f7fbff));
+}
+
+/* =====================================================================
+ * 图标行 + 「专属标识」（2026-09-20）
+ *
+ * 需求：权益卡片的图标右侧显示「仅限私教会员+」这类标识，
+ *       让会员一眼看出「这项不是人人都有」，不用翻到等级说明里对。
+ * 标识文案由后端按权益的「适用等级」推导（见 src/lib/content-access.js 的
+ * benefitAccessBadge），不限等级的权益不下发 → 这里就不会渲染，图标位置也不动。
+ * ===================================================================== */
+.benefit-head {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  min-height: 48px;
+}
+
+.benefit-head .benefit-icon { flex: none; }
+
+/* 底色 = 主题「金」色与卡片同源混合，文字用 --ink：
+ * 浅色主题得到奶油底深字，暗色主题得到深棕底浅字，两套都读得清。
+ * 刻意不硬编码色值，否则就是上面 .benefit-card 那条坑的翻版。 */
+.benefit-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .625rem;
+  border: 1px solid color-mix(in srgb, var(--brand-gold, #d4a84b) 45%, transparent);
+  border-radius: 999px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--brand-gold, #d4a84b) 22%, var(--paper-solid, #f7fbff));
+  font-size: var(--font-12);
+  font-weight: 700;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .benefit-usage { padding: .875rem 1rem 1rem; border-radius: 1rem; }
+  .benefit-usage-head h3 { font-size: var(--font-18); }
+  .benefit-badge { padding: .1875rem .5rem; font-size: var(--font-12); }
+}

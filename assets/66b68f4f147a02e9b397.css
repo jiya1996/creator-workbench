@@ -1,0 +1,40 @@
+.visit-counter[hidden] { display: none !important; }
+.visit-counter {
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  color: var(--muted, #718094);
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.visit-counter strong { color: var(--ink, #40566f); font-size: 0.75rem; font-weight: 750; }
+.visit-counter__separator { opacity: 0.5; }
+.visit-counter--inline { display: inline-flex; }
+.auth-footer .visit-counter { display: inline-flex; }
+.auth-footer .visit-counter > span { display: inline; }
+.visit-counter--standalone {
+  width: min(100% - 2rem, 73.75rem);
+  min-height: 3rem;
+  margin: 0 auto 1.5rem;
+  padding: 0.7rem 1rem;
+  display: flex;
+  border: 1px solid rgba(77, 95, 119, 0.12);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(0.75rem);
+  -webkit-backdrop-filter: blur(0.75rem);
+}
+.checkin-card > .visit-counter--standalone {
+  width: 100%;
+  margin: 1rem auto 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+  background: transparent;
+}

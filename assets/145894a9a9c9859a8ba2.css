@@ -1,0 +1,17 @@
+.course-practice { max-width: 1100px; margin: 1.5rem auto 3rem; padding: clamp(1.2rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: 1.5rem; background: var(--paper-solid); color: var(--ink); }
+/* 沉浸式课程页：底部「学完就试一次」与上方「内容要点 + 待办或作业」宽度对齐。
+   .immersive-shell 是 grid 容器（immersive 模式 width: min(1760px, calc(100% - 18px))），
+   而 .course-practice 自带的 max-width: 1100px 会把它挤成居中窄块，与上方整行卡片对不齐。
+   这里覆盖为「与网格同宽、零外边距」，左右边界即 shell 的左右边界。 */
+.immersive-shell > .course-practice { max-width: none; width: 100%; margin: 0; }
+.course-practice-label { color: var(--brand-deep); font-size: var(--font-14); font-weight: 700; }
+.course-practice h2 { margin: .4rem 0; font-size: var(--font-24); }
+.course-practice p { font-size: var(--font-16); line-height: 1.65; }
+.course-practice-guide { white-space: pre-line; }
+.course-practice textarea { display: block; box-sizing: border-box; width: 100%; min-height: 6.5rem; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: .8rem; background: var(--paper); color: var(--ink); font: inherit; font-size: var(--font-16); }
+.course-practice textarea:focus-visible, .course-practice button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.course-practice-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .9rem; }
+.course-practice button { border: 1px solid var(--brand); border-radius: .8rem; padding: .7rem 1rem; background: var(--brand-deep); color: var(--paper-solid); font: inherit; font-size: var(--font-16); cursor: pointer; }
+.course-practice button + button { color: var(--brand-deep); background: var(--paper-solid); }
+.course-practice button:disabled { opacity: .55; cursor: wait; }
+.course-practice a { color: var(--brand-deep); font-size: var(--font-16); }

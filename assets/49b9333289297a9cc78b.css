@@ -1,0 +1,88 @@
+/* Layout only. Controls, buttons, cards and pagination use the existing shared styles. */
+body[data-page="smart-plans"] { --sl-surface:color-mix(in srgb,var(--paper-solid) 90%,transparent); --sl-border:var(--line); --sl-shadow:0 14px 38px color-mix(in srgb,var(--brand-deep) 7%,transparent); font-size:var(--font-16); line-height:1.7; }
+body[data-page="smart-plans"] .pm-panel { margin-top: 1.25rem; }
+body[data-page="smart-plans"] pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 22rem; overflow: auto; font: inherit; line-height: 1.8; }
+body[data-page="smart-plans"] .dp-card { margin: .75rem 0; overflow-wrap: anywhere; }
+.smart-material-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; margin-top:1rem; }
+.smart-material-actions .pm-btn { flex:0 1 auto; max-width:100%; }
+.smart-material-number { display:inline-grid;place-items:center;flex:none;min-width:2rem;height:2rem;border-radius:.6rem;background:color-mix(in srgb,var(--brand) 12%,var(--paper-solid));color:var(--brand-deep);font-weight:700; }
+body[data-page="smart-plans"] .pm-panel .smart-material-meta { display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;margin:.6rem 0; }
+.smart-material-status { display:inline-flex;align-items:center;padding:.15rem .65rem;border:1px solid var(--line);border-radius:999px;font-size:var(--font-14);font-weight:600; }
+.smart-material-status[data-status="confirmed"] { color:#087446;border-color:#21a66a;background:color-mix(in srgb,#21a66a 8%,var(--paper-solid)); }
+.smart-material-status[data-status="rejected"] { color:#a82c30;border-color:#d35555;background:color-mix(in srgb,#d35555 8%,var(--paper-solid)); }
+.smart-material-status[data-status="pending"] { color:#886013;border-color:#c59639;background:color-mix(in srgb,#c59639 8%,var(--paper-solid)); }
+.smart-selection-status:not(:empty) { margin:.5rem 0;color:var(--brand-deep);font-weight:600; }
+body[data-page="smart-plans"] [data-smart-sources] { align-items: center; }
+[data-smart-note-filter-wrap] { margin: .75rem 0; font-size: var(--font-14); overflow-wrap: anywhere; }
+[data-smart-note-filter-wrap][hidden] { display: none; }
+.smart-moments-body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85;}
+.smart-moments-workspace { align-self:flex-start;max-width:100%; }
+/* 标签紧贴上一段说明，会被读成同一句话；每个字段上方留一点空，说明和控件分开（PRD 10.1） */
+body[data-page="smart-plans"] .pm-panel .pm-field { margin-top: .9rem; }
+body[data-page="smart-plans"] .pm-panel form > .pm-field:first-child { margin-top: 0; }
+body[data-page="smart-plans"] .pm-panel .pm-muted + .pm-field { margin-top: 1rem; }
+body[data-page="smart-plans"] .pm-panel [data-smart-model] { margin-top: .55rem; }
+body[data-page="smart-plans"] .pm-panel [data-smart-model]:empty { display: none; }
+/* 说明文字整段贴在一起会像一坨：段与段、复选框之间留出呼吸，读起来才分段清楚 */
+body[data-page="smart-plans"] .pm-panel p { margin: 0; }
+body[data-page="smart-plans"] .pm-panel p + p { margin-top: .5rem; }
+body[data-page="smart-plans"] .pm-panel .dp-check { margin-top: .55rem; }
+body[data-page="smart-plans"] .pm-panel .pm-muted { line-height: 1.8; }
+
+/* 文件选择沿用页面表单与按钮的配色，同时保留原生文件名和键盘操作。 */
+body[data-page="smart-plans"] input[type="file"][data-story-file] { width: 100%; max-width: 100%; padding: .55rem; border: 1px solid color-mix(in srgb, var(--brand) 22%, white); border-radius: .75rem; background: color-mix(in srgb, var(--brand) 3%, white); color: var(--ink); font: inherit; }
+body[data-page="smart-plans"] input[type="file"][data-story-file]::file-selector-button { margin-right: .75rem; padding: .55rem .85rem; border: 1px solid color-mix(in srgb, var(--brand) 35%, white); border-radius: .6rem; background: white; color: var(--brand-deep); font: inherit; font-weight: 700; cursor: pointer; }
+body[data-page="smart-plans"] input[type="file"][data-story-file]::file-selector-button:hover { background: color-mix(in srgb, var(--brand) 10%, white); border-color: var(--brand); }
+body[data-page="smart-plans"] [data-smart-form-status]:not(:empty) { margin: .65rem 0 0; color: var(--brand-deep); font-weight: 700; }
+[data-smart-sources][hidden] { display:none; }
+.story-prompt-options { display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:1rem;align-items:end; }
+.story-days-input { position:relative;display:block; }
+.story-days-input input { width:100%;padding-right:3rem; }
+.story-days-input > span { position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none; }
+@media(max-width:480px){.story-prompt-options{grid-template-columns:1fr;gap:.4rem}}
+body[data-page="smart-plans"] [data-story-prompt-output] { min-height:16rem; font-weight:400; resize:vertical; }
+.story-prompt-editor { position:relative;display:block;margin-top:.5rem; }
+.story-prompt-editor textarea { padding-bottom:2.5rem; }
+.story-prompt-count { position:absolute;right:1rem;bottom:.65rem;padding:0 .25rem;background:var(--paper-solid);color:var(--muted);font-size:var(--font-14);pointer-events:none; }
+.pm-dialog.story-prompt-modal { position:fixed;inset:0;box-sizing:border-box;margin:auto;width:min(1200px,calc(100vw - 24px));height:calc(100vh - 24px);height:calc(100dvh - 24px);max-width:none;max-height:none;padding:1.25rem;border:1px solid var(--line);border-radius:1rem;background:var(--paper-solid);color:var(--ink);font:inherit; }
+.story-prompt-modal::backdrop { background:rgba(10,25,20,.55); }
+.story-prompt-modal[open] { display:flex;flex-direction:column;gap:1rem; }
+.story-prompt-modal header { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;flex-shrink:0; }
+.story-prompt-modal header h2 { margin:0;font-size:var(--font-20); }
+.story-prompt-modal-content,.story-prompt-modal .story-prompt-editor { flex:1;min-height:0;display:flex;flex-direction:column; }
+body[data-page="smart-plans"] .story-prompt-modal [data-story-prompt-output] { flex:1;min-height:0;width:100%;resize:none;box-sizing:border-box;font:inherit;line-height:1.8;padding:1rem 1rem 2.8rem; }
+@media(max-width:600px){.pm-dialog.story-prompt-modal{padding:.85rem;width:calc(100vw - 16px);height:calc(100dvh - 16px)}.story-prompt-modal header{gap:.5rem}.story-prompt-modal header .pm-btn{min-height:44px}.story-prompt-modal .story-prompt-editor{margin-top:0}}
+
+/* 素材计划步骤导航和检查记录 */
+.smart-section-nav{position:sticky;top:8px;z-index:20;display:flex;gap:.55rem;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;margin:1.25rem 0 .5rem;padding:.65rem;border:1px solid var(--line);border-radius:1rem;background:var(--paper-solid);box-shadow:0 6px 20px color-mix(in srgb,var(--brand-deep) 12%,transparent)}
+.smart-section-nav a{display:inline-flex;flex:none;align-items:center;padding:.6rem .85rem;border:1px solid var(--line);border-radius:.75rem;background:var(--paper-solid);color:var(--brand-deep);font-weight:700;text-decoration:none;white-space:nowrap}
+.smart-section-nav a[hidden]{display:none}
+.smart-gifts > summary{cursor:pointer;list-style:none}
+.smart-gifts > summary::-webkit-details-marker{display:none}
+.smart-gifts > summary::after{content:'展开';color:var(--brand-deep);font-size:var(--font-14);font-weight:600;margin-left:auto}
+.smart-gifts[open] > summary::after{content:'收起'}
+.smart-gifts > summary h2{margin:0;font-size:var(--font-20)}
+.smart-gifts-body{margin-top:1rem}
+.smart-gifts-body form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+body[data-page="smart-plans"] .smart-gifts-body form > .pm-field{margin:0}
+.smart-gifts-body .pm-field{display:grid;gap:.4rem;min-width:0;color:var(--ink);font-weight:700}
+.smart-gifts-body .pm-field input{width:100%;min-width:0;min-height:2.8rem;box-sizing:border-box;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.75rem;background:var(--paper-solid);color:var(--ink);font:inherit;font-weight:400}
+.smart-gifts-body .pm-field input:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.smart-gifts-body form .dp-check,.smart-gifts-body form button{grid-column:1/-1}
+.smart-gifts-body form button{justify-self:start}
+@media(max-width:600px){.smart-gifts-body form{grid-template-columns:minmax(0,1fr)}.smart-gifts-body form .dp-check,.smart-gifts-body form button{grid-column:auto}}
+.smart-section-nav a:hover,.smart-section-nav a:focus-visible{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--paper-solid))}
+#smart-prompt,#smart-discover,#materials,#smart-gifts,#smart-video,#moments{scroll-margin-top:var(--smart-nav-offset,110px)}
+.smart-section-number{display:inline-flex;align-items:center;justify-content:center;margin-right:.65rem;width:2.1rem;height:2.1rem;border-radius:.7rem;background:color-mix(in srgb,var(--brand) 12%,var(--paper-solid));color:var(--brand-deep);font-size:.9em}
+.smart-checks{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+.smart-checks summary{cursor:pointer;font-weight:700;font-size:1.1em;color:var(--ink)}
+.smart-checks[open] > p{margin-top:.75rem}
+.smart-table-wrap{max-width:100%;overflow-x:auto;margin-top:.8rem;border:1px solid var(--line);border-radius:.8rem}
+.smart-runs-table{width:100%;min-width:560px;border-collapse:collapse;text-align:left}
+.smart-runs-table th,.smart-runs-table td{padding:.8rem 1rem;vertical-align:top;border-bottom:1px solid var(--line)}
+.smart-runs-table th{background:color-mix(in srgb,var(--brand) 7%,var(--paper-solid));white-space:nowrap}
+.smart-runs-table tbody tr:last-child td{border-bottom:0}
+.smart-runs-table td:nth-child(-n+2){white-space:nowrap}
+.smart-source-updates{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+@media(max-width:900px){.smart-section-nav{top:max(72px,calc(env(safe-area-inset-top) + 60px))}}
+@media(max-width:600px){.smart-section-nav a{font-size:.9em;padding:.55rem .6rem}.smart-table-wrap{overscroll-behavior-x:contain}}

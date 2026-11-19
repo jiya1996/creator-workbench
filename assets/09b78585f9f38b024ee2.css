@@ -1,0 +1,32 @@
+/* 中英文字体与轻弹反馈，复用全站字号令牌；没有外部字体网络请求。 */
+@font-face {
+  font-family:"Wxgc Editorial Latin";
+  src:local("American Typewriter"),local("AmericanTypewriter"),local("Georgia");
+  font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0000-024F;
+}
+@font-face {
+  font-family:"Wxgc Editorial Latin";
+  src:local("American Typewriter Bold"),local("AmericanTypewriter-Bold"),local("Georgia Bold");
+  font-weight:700;font-style:normal;font-display:swap;unicode-range:U+0000-024F;
+}
+:root {
+  --font-ui:"Wxgc Editorial Latin","PingFang SC","Microsoft YaHei UI","Noto Sans CJK SC",sans-serif;
+  --motion-spring:cubic-bezier(.22,1.25,.36,1);
+}
+html body,html body :is(button,input,select,textarea,h1,h2,h3,h4,h5,h6) { font-family:var(--font-ui); }
+html body { text-rendering:optimizeLegibility; }
+html body :is(h1,h2,h3) { text-wrap:pretty; }
+html body :is(.desk-eyebrow,.pm-eyebrow,.sidebar-brand small) { letter-spacing:.09em; }
+html body .theme-name { font-size:var(--font-14);color:var(--ink); }
+html body .theme-picker-tip { font-size:var(--font-14);color:var(--muted);line-height:1.75; }
+html body .theme-picker-content { background:var(--paper-solid);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow); }
+html body .theme-picker-content h3 { color:var(--ink);font-size:var(--font-20); }
+html body .theme-picker-option { background:var(--paper);border-radius:12px; }
+html body .theme-picker-option:hover { background:color-mix(in srgb,var(--brand) 6%,var(--paper-solid)); }
+html body .theme-picker-option:focus-visible { outline:3px solid var(--brand-deep);outline-offset:3px; }
+html body .wxgc-spring-pressed { scale:.975; }
+@media(prefers-reduced-motion:reduce) {
+  html body .wxgc-spring-pressed { scale:none; }
+  html { scroll-behavior:auto; }
+  html body :is(.starter-card,.content-card,.settings-card,.nav-item,.desk-button,.pm-btn,.theme-picker-option) { transition-duration:0s; }
+}

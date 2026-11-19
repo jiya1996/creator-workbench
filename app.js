@@ -137,7 +137,7 @@ function cleanDocument(data) {
     const original = element.getAttribute('href')
     if (!original || original.startsWith('#')) return
     const url = new URL(original, data.url)
-    if (/^(www\.)?wxgaochu\.com$/.test(url.hostname)) url.pathname = '/creator-workbench' + url.pathname
+    if (/^(www\.)?wxgaochu\.com$/.test(url.hostname) && !url.pathname.startsWith('/creator-workbench/')) url.pathname = '/creator-workbench' + url.pathname
     const reference = /feishu\.cn$/.test(url.hostname) ? catalog.references?.[url.pathname.split('/').pop()] : null
     const shortLink = catalog.shortLinks?.[url.origin + url.pathname]
     if ((reference && !element.hasAttribute('data-original-source')) || shortLink) {
